@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    /* Language and Environment */
+    "target": "es6",
+
+    /* Modules */
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+
+    /* JavaScript Support */
+    "allowJs": false,
+
+    /* Emit */
+    "sourceMap": true,
+    "outDir": "dist",
+    "removeComments": true,
+
+    /* Interop Constraints */
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+
+    /* Type Checking */
+    "alwaysStrict": true
+  },
+  "exclude": ["node_modules"]
+}
