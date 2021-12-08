@@ -10,14 +10,13 @@ let frequency;
 let myBeep;
 let otherBeeps = {};
 
-// straight key settings
-let STRAIGHT_KEY = " ";
-
-// paddle key settings
+// keys
 let i;
 
+let STRAIGHT_KEY = " ";
 let DOT_KEY = "k";
 let DASH_KEY = "l";
+
 let DOT_LENGTH = 100;
 let DASH_LENGTH = DOT_LENGTH * 3;
 let PAUSE_LENGTH = DOT_LENGTH;
@@ -81,14 +80,12 @@ window.onload = () => {
   document.addEventListener("keyup", handleKeyUp);
 };
 
-// cleanup
 window.onunload = () => {
   document.removeEventListener("keydown", handleKeyDown);
   document.removeEventListener("keyup", handleKeyUp);
 };
 
 /* SOCKET */
-// listen
 socket.on("notification", (notification) => {
   const ul = document.getElementById("user-notifications");
   const li = document.createElement("li");
@@ -122,6 +119,7 @@ socket.on("message", (message) => {
   ul.appendChild(li);
 });
 
+/* FORMS */
 // login
 const loginForm = document.getElementById("login-form");
 loginForm.addEventListener("submit", function (e) {
