@@ -1,6 +1,6 @@
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 export class Beep {
-  constructor(frequency = 880) {
+  constructor(frequency = 400) {
     this.frequency = frequency;
     this.oscillator = audioContext.createOscillator();
   }

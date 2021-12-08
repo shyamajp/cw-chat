@@ -4,7 +4,7 @@ import { Beep } from "./beep.js";
 /* DATA */
 let room = "";
 let name = "";
-let frequency = 880;
+let frequency;
 
 // beeps
 let myBeep;
@@ -16,81 +16,69 @@ let STRAIGHT_KEY = " ";
 // paddle key settings
 let i;
 
-let DOT_KEY = "l";
-let DASH_KEY = "k";
+let DOT_KEY = "k";
+let DASH_KEY = "l";
 let DOT_LENGTH = 100;
 let DASH_LENGTH = DOT_LENGTH * 3;
 let PAUSE_LENGTH = DOT_LENGTH;
 
 /* KEY EVENTS */
-// StraightKey only
+const handleKeyUp = (e) => {
+  // straight
+  if (e.key === STRAIGHT_KEY) {
+    myBeep.stop();
+    socket.emit("message", "u");
+  }
+  // paddle
+  else if (e.key === DOT_KEY || e.key === DASH_KEY) {
+    myBeep.stop();
+    clearInterval(i);
+    i = undefined;
+  }
+};
+
+function dot() {
+  socket.emit("message", "d");
+  myBeep = new Beep(frequency);
+  myBeep.play();
+  setTimeout(() => {
+    socket.emit("message", "u");
+    myBeep.stop();
+  }, DOT_LENGTH);
+  return dot;
+}
+
+function dash() {
+  socket.emit("message", "d");
+  myBeep = new Beep(frequency);
+  myBeep.play();
+  setTimeout(() => {
+    socket.emit("message", "u");
+    myBeep.stop();
+  }, DASH_LENGTH);
+  return dash;
+}
+
 const handleKeyDown = (e) => {
+  // straight
   if (e.key === STRAIGHT_KEY && !e.repeat) {
     socket.emit("message", "d");
     myBeep = new Beep(frequency);
     myBeep.play();
   }
-};
-
-const handleKeyUp = (e) => {
-  if (e.key === STRAIGHT_KEY) {
-    socket.emit("message", "u");
-    myBeep.stop();
+  // dot
+  else if (e.key === DOT_KEY && !e.repeat && !i) {
+    i = setInterval(dot(), DOT_LENGTH + PAUSE_LENGTH);
   }
-};
-
-const handleDotKeyDown = (e) => {
-  if (e.key === DOT_KEY && !e.repeat) {
-    clearInterval(i);
-    i = setInterval(() => {
-      socket.emit("message", "d");
-      myBeep = new Beep(frequency);
-      myBeep.play();
-      setTimeout(() => {
-        socket.emit("message", "u");
-        myBeep.stop();
-      }, DOT_LENGTH);
-    }, DOT_LENGTH + PAUSE_LENGTH);
-  }
-};
-
-const handleDashKeyDown = (e) => {
-  if (e.key === DASH_KEY && !e.repeat) {
-    clearInterval(i);
-    i = setInterval(() => {
-      socket.emit("message", "d");
-      myBeep = new Beep(frequency);
-      myBeep.play();
-      setTimeout(() => {
-        socket.emit("message", "u");
-        myBeep.stop();
-      }, DASH_LENGTH);
-    }, DASH_LENGTH + PAUSE_LENGTH);
-  }
-};
-
-const handleDotKeyUp = (e) => {
-  if (e.key === DOT_KEY) {
-    clearInterval(i);
-  }
-};
-
-const handleDashKeyUp = (e) => {
-  if (e.key === DASH_KEY) {
-    clearInterval(i);
+  // dash
+  else if (e.key === DASH_KEY && !e.repeat && !i) {
+    i = setInterval(dash(), DASH_LENGTH + PAUSE_LENGTH);
   }
 };
 
 window.onload = () => {
-  // straight key
   document.addEventListener("keydown", handleKeyDown);
   document.addEventListener("keyup", handleKeyUp);
-
-  // paddle key
-  document.addEventListener("keydown", handleDotKeyDown);
-  document.addEventListener("keyup", handleDotKeyUp);
-  document.addEventListener("keydown", handleDashKeyDown);
-  document.addEventListener("keyup", handleDashKeyUp);
 };
 
 // cleanup
