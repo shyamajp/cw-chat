@@ -5,13 +5,10 @@ export class Beep {
     this.oscillator = audioContext.createOscillator();
   }
 
-  init() {
+  play() {
     this.oscillator.type = "sine";
     this.oscillator.frequency.value = this.frequency;
     this.oscillator.connect(audioContext.destination);
-  }
-
-  play() {
     this.oscillator.start();
   }
 

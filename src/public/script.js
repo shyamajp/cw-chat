@@ -28,7 +28,6 @@ const handleKeyDown = (e) => {
   if (e.key === STRAIGHT_KEY && !e.repeat) {
     socket.emit("message", "d");
     myBeep = new Beep(frequency);
-    myBeep.init();
     myBeep.play();
   }
 };
@@ -46,7 +45,6 @@ const handleDotKeyDown = (e) => {
     i = setInterval(() => {
       socket.emit("message", "d");
       myBeep = new Beep(frequency);
-      myBeep.init();
       myBeep.play();
       setTimeout(() => {
         socket.emit("message", "u");
@@ -62,7 +60,6 @@ const handleDashKeyDown = (e) => {
     i = setInterval(() => {
       socket.emit("message", "d");
       myBeep = new Beep(frequency);
-      myBeep.init();
       myBeep.play();
       setTimeout(() => {
         socket.emit("message", "u");
@@ -126,7 +123,6 @@ socket.on("message", (message) => {
 
   if (text === "d") {
     otherBeeps[id] = new Beep(othersFrequency);
-    otherBeeps[id].init();
     otherBeeps[id].play();
   } else if (text === "u") {
     otherBeeps[id].stop();
