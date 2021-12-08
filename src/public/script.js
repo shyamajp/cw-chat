@@ -1,9 +1,10 @@
 const socket = io();
 
-// data
+/* DATA */
 let room = "";
 let name = "";
 
+/* SOCKET */
 // listen
 socket.on("notification", (notification) => {
   const ul = document.getElementById("user-notifications");
@@ -45,7 +46,6 @@ loginForm.addEventListener("submit", function (e) {
 
 // message
 const input = document.getElementById("message");
-
 input.addEventListener("input", function (e) {
   const message = e.target.value;
   if (message) {
@@ -53,3 +53,28 @@ input.addEventListener("input", function (e) {
     input.value = "";
   }
 });
+
+/* KEY EVENTS */
+// StraightKey only
+const handleKeyDown = (e) => {
+  if (e.key === " " && !e.repeat) {
+    socket.emit("message", "d");
+  }
+};
+
+const handleKeyUp = (e) => {
+  if (e.key === " ") {
+    socket.emit("message", "u");
+  }
+};
+
+window.onload = () => {
+  document.addEventListener("keydown", handleKeyDown);
+  document.addEventListener("keyup", handleKeyUp);
+};
+
+// cleanup
+window.onunload = () => {
+  document.removeEventListener("keydown", handleKeyDown);
+  document.removeEventListener("keyup", handleKeyUp);
+};
