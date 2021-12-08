@@ -18,7 +18,7 @@ let i;
 
 let DOT_KEY = "l";
 let DASH_KEY = "k";
-let DOT_LENGTH = 200;
+let DOT_LENGTH = 100;
 let DASH_LENGTH = DOT_LENGTH * 3;
 let PAUSE_LENGTH = DOT_LENGTH;
 
@@ -49,7 +49,7 @@ const handleDotKeyDown = (e) => {
       setTimeout(() => {
         socket.emit("message", "u");
         myBeep.stop();
-      }, PAUSE_LENGTH);
+      }, DOT_LENGTH);
     }, DOT_LENGTH + PAUSE_LENGTH);
   }
 };
@@ -64,7 +64,7 @@ const handleDashKeyDown = (e) => {
       setTimeout(() => {
         socket.emit("message", "u");
         myBeep.stop();
-      }, PAUSE_LENGTH);
+      }, DASH_LENGTH);
     }, DASH_LENGTH + PAUSE_LENGTH);
   }
 };
