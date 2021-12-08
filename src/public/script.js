@@ -1,4 +1,5 @@
 const socket = io();
+import { Beep } from "./beep.js";
 
 /* DATA */
 let room = "";
@@ -8,30 +9,6 @@ let myBeep;
 
 /* KEY EVENTS */
 // audio stuff
-class Beep {
-  constructor(frequency) {
-    this.frequency = frequency;
-    this.audioContext = new AudioContext();
-    this.oscillator = this.audioContext.createOscillator();
-  }
-
-  init() {
-    this.oscillator.type = "sine";
-    this.oscillator.frequency.value = frequency;
-
-    this.oscillator.connect(this.audioContext.destination);
-    this.oscillator.start();
-    this.audioContext.suspend();
-  }
-
-  play() {
-    this.audioContext.resume();
-  }
-
-  stop() {
-    this.audioContext.suspend();
-  }
-}
 
 // StraightKey only
 const handleKeyDown = (e) => {
