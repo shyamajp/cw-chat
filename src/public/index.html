@@ -11,6 +11,7 @@
     <ul>
       <li>Room: <span id="user-room"></span></li>
       <li>Name: <span id="user-name"></span></li>
+      <li>Frequency: <span id="user-frequency"></span></li>
       <li>
         Users:
         <ul id="user-list"></ul>
@@ -28,6 +29,15 @@
       <br />
       <label for="name">name</label>
       <input id="name" name="name" />
+      <br />
+      <label for="frequency">frequency</label>
+      <input
+        type="range"
+        min="440"
+        max="1600"
+        id="frequency"
+        name="frequency"
+      />
       <br />
       <button type="submit">login</button>
     </form>

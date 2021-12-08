@@ -3,6 +3,61 @@ const socket = io();
 /* DATA */
 let room = "";
 let name = "";
+let frequency = 880;
+let myBeep;
+
+/* KEY EVENTS */
+// audio stuff
+class Beep {
+  constructor(frequency) {
+    this.frequency = frequency;
+    this.audioContext = new AudioContext();
+    this.oscillator = this.audioContext.createOscillator();
+  }
+
+  init() {
+    this.oscillator.type = "sine";
+    this.oscillator.frequency.value = frequency;
+
+    this.oscillator.connect(this.audioContext.destination);
+    this.oscillator.start();
+    this.audioContext.suspend();
+  }
+
+  play() {
+    this.audioContext.resume();
+  }
+
+  stop() {
+    this.audioContext.suspend();
+  }
+}
+
+// StraightKey only
+const handleKeyDown = (e) => {
+  if (e.key === " " && !e.repeat) {
+    socket.emit("message", "d");
+    myBeep.play();
+  }
+};
+
+const handleKeyUp = (e) => {
+  if (e.key === " ") {
+    socket.emit("message", "u");
+    myBeep.stop();
+  }
+};
+
+window.onload = () => {
+  document.addEventListener("keydown", handleKeyDown);
+  document.addEventListener("keyup", handleKeyUp);
+};
+
+// cleanup
+window.onunload = () => {
+  document.removeEventListener("keydown", handleKeyDown);
+  document.removeEventListener("keyup", handleKeyUp);
+};
 
 /* SOCKET */
 // listen
@@ -24,7 +79,7 @@ socket.on("users", (users) => {
 });
 
 socket.on("message", (message) => {
-  const { user, text } = message;
+  const { user, text, frequency } = message;
   const ul = document.getElementById("messages");
   const li = document.createElement("li");
   li.appendChild(document.createTextNode(`${user}: ${text}`));
@@ -38,10 +93,14 @@ loginForm.addEventListener("submit", function (e) {
 
   room = e.target.room?.value;
   name = e.target.name?.value;
-  socket.emit("login", { room, name });
+  frequency = e.target.frequency?.value;
+  myBeep = new Beep(frequency);
+  myBeep.init();
+  socket.emit("login", { room, name, frequency });
 
   document.getElementById("user-room").textContent = room;
   document.getElementById("user-name").textContent = name;
+  document.getElementById("user-frequency").textContent = frequency;
 });
 
 // message
@@ -53,28 +112,3 @@ input.addEventListener("input", function (e) {
     input.value = "";
   }
 });
-
-/* KEY EVENTS */
-// StraightKey only
-const handleKeyDown = (e) => {
-  if (e.key === " " && !e.repeat) {
-    socket.emit("message", "d");
-  }
-};
-
-const handleKeyUp = (e) => {
-  if (e.key === " ") {
-    socket.emit("message", "u");
-  }
-};
-
-window.onload = () => {
-  document.addEventListener("keydown", handleKeyDown);
-  document.addEventListener("keyup", handleKeyUp);
-};
-
-// cleanup
-window.onunload = () => {
-  document.removeEventListener("keydown", handleKeyDown);
-  document.removeEventListener("keyup", handleKeyUp);
-};

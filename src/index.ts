@@ -13,8 +13,8 @@ app.use(cors());
 
 // TOOD: add error handling
 io.on("connection", (socket) => {
-  socket.on("login", ({ name, room }) => {
-    const { user, error } = addUser(socket.id, name, room);
+  socket.on("login", ({ name, room, frequency }) => {
+    const { user, error } = addUser(socket.id, name, room, frequency);
     if (user) {
       console.log("User connected");
       socket.join(room);
@@ -26,7 +26,11 @@ io.on("connection", (socket) => {
   socket.on("message", (message) => {
     const user = getUser(socket.id);
     if (user) {
-      io.in(user.room).emit("message", { user: user.name, text: message });
+      io.in(user.room).emit("message", {
+        user: user.name,
+        text: message,
+        frequency: user.frequency,
+      });
     }
   });
 

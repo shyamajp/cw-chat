@@ -1,6 +1,6 @@
 const users = [];
 
-export const addUser = (id, name, room) => {
+export const addUser = (id, name, room, frequency) => {
   const existingUser = users.find(
     (user) => user.name.trim().toLowerCase() === name.trim().toLowerCase()
   );
@@ -10,7 +10,7 @@ export const addUser = (id, name, room) => {
   if (!name) return { error: "Username is required" };
   if (!room) return { error: "Room is required" };
 
-  const user = { id, name, room };
+  const user = { id, name, room, frequency };
   users.push(user);
   return { user };
 };
