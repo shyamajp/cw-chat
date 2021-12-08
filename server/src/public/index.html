@@ -7,6 +7,69 @@
     <title>Test</title>
   </head>
   <body>
-    test
+    <h2>User</h2>
+    <ul>
+      <li>Room: <span id="user-room"></span></li>
+      <li>Name: <span id="user-name"></span></li>
+    </ul>
+    <hr />
+    <form id="login-form">
+      <h2>Login</h2>
+      <label for="room">room</label>
+      <input id="room" name="room" />
+      <br />
+      <label for="name">name</label>
+      <input id="name" name="name" />
+      <br />
+      <button type="submit">login</button>
+    </form>
+    <hr />
+    <form>
+      <h2>Message</h2>
+      <input id="message" />
+    </form>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const socket = io();
+
+      // data
+      let room = "";
+      let name = "";
+
+      // listen
+      socket.on("notification", (data) => {
+        console.log("notification", data);
+      });
+      socket.on("users", (data) => {
+        console.log("users", data);
+      });
+      socket.on("message", (data) => {
+        console.log("message", data);
+      });
+
+      // login
+      const loginForm = document.getElementById("login-form");
+      loginForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        room = e.target.room?.value;
+        name = e.target.name?.value;
+        socket.emit("login", { room, name });
+
+        document.getElementById("user-room").textContent = room;
+        document.getElementById("user-name").textContent = name;
+      });
+
+      // message
+      const input = document.getElementById("message");
+
+      input.addEventListener("input", function (e) {
+        const message = e.target.value;
+        if (message) {
+          socket.emit("message", message);
+          input.value = "";
+        }
+      });
+    </script>
   </body>
 </html>
