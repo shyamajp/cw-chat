@@ -6,6 +6,7 @@ let room = "";
 let name = "";
 let frequency = 880;
 let myBeep;
+let otherBeep;
 
 /* KEY EVENTS */
 // audio stuff
@@ -57,6 +58,19 @@ socket.on("users", (users) => {
 
 socket.on("message", (message) => {
   const { user, text, frequency } = message;
+
+  if (!otherBeep) {
+    console.log("new noe");
+    otherBeep = new Beep(frequency);
+    otherBeep.init();
+  }
+
+  if (text === "d") {
+    otherBeep.play();
+  } else if (text === "u") {
+    otherBeep.stop();
+  }
+
   const ul = document.getElementById("messages");
   const li = document.createElement("li");
   li.appendChild(document.createTextNode(`${user}: ${text}`));

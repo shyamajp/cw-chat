@@ -1,24 +1,24 @@
+const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 export class Beep {
   constructor(frequency = 880) {
     this.frequency = frequency;
-    this.audioContext = new AudioContext();
-    this.oscillator = this.audioContext.createOscillator();
+    this.oscillator = audioContext.createOscillator();
   }
 
   init() {
     this.oscillator.type = "sine";
     this.oscillator.frequency.value = this.frequency;
 
-    this.oscillator.connect(this.audioContext.destination);
+    this.oscillator.connect(audioContext.destination);
     this.oscillator.start();
-    this.audioContext.suspend();
+    audioContext.suspend();
   }
 
   play() {
-    this.audioContext.resume();
+    audioContext.resume();
   }
 
   stop() {
-    this.audioContext.suspend();
+    audioContext.suspend();
   }
 }

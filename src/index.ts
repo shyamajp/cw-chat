@@ -26,7 +26,7 @@ io.on("connection", (socket) => {
   socket.on("message", (message) => {
     const user = getUser(socket.id);
     if (user) {
-      io.in(user.room).emit("message", {
+      socket.to(user.room).emit("message", {
         user: user.name,
         text: message,
         frequency: user.frequency,
