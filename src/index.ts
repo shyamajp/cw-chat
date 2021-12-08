@@ -1,7 +1,8 @@
 import cors from "cors";
 import path from "path";
+import express from "express";
 
-const app = require("express")();
+const app = express();
 const server = require("http").createServer(app);
 const io = require("socket.io")(server);
 
@@ -41,6 +42,7 @@ io.on("connection", (socket) => {
   });
 });
 
+app.use(express.static(__dirname + "/public"));
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname + "/public/index.html"));
 });
