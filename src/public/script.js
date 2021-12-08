@@ -5,16 +5,18 @@ import { Beep } from "./beep.js";
 let room = "";
 let name = "";
 let frequency = 880;
+
+// beeps
 let myBeep;
-let otherBeep;
+let otherBeeps = {};
 
 /* KEY EVENTS */
-// audio stuff
-
 // StraightKey only
 const handleKeyDown = (e) => {
   if (e.key === " " && !e.repeat) {
     socket.emit("message", "d");
+    myBeep = new Beep(frequency);
+    myBeep.init();
     myBeep.play();
   }
 };
@@ -57,18 +59,14 @@ socket.on("users", (users) => {
 });
 
 socket.on("message", (message) => {
-  const { user, text, frequency } = message;
-
-  if (!otherBeep) {
-    console.log("new noe");
-    otherBeep = new Beep(frequency);
-    otherBeep.init();
-  }
+  const { id, user, text, frequency: othersFrequency } = message;
 
   if (text === "d") {
-    otherBeep.play();
+    otherBeeps[id] = new Beep(othersFrequency);
+    otherBeeps[id].init();
+    otherBeeps[id].play();
   } else if (text === "u") {
-    otherBeep.stop();
+    otherBeeps[id].stop();
   }
 
   const ul = document.getElementById("messages");
@@ -85,8 +83,6 @@ loginForm.addEventListener("submit", function (e) {
   room = e.target.room?.value;
   name = e.target.name?.value;
   frequency = e.target.frequency?.value;
-  myBeep = new Beep(frequency);
-  myBeep.init();
   socket.emit("login", { room, name, frequency });
 
   document.getElementById("user-room").textContent = room;

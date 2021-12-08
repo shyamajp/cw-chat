@@ -8,17 +8,14 @@ export class Beep {
   init() {
     this.oscillator.type = "sine";
     this.oscillator.frequency.value = this.frequency;
-
     this.oscillator.connect(audioContext.destination);
-    this.oscillator.start();
-    audioContext.suspend();
   }
 
   play() {
-    audioContext.resume();
+    this.oscillator.start();
   }
 
   stop() {
-    audioContext.suspend();
+    this.oscillator.stop();
   }
 }
