@@ -10,10 +10,22 @@ let frequency = 880;
 let myBeep;
 let otherBeeps = {};
 
+// straight key settings
+let STRAIGHT_KEY = " ";
+
+// paddle key settings
+let i;
+
+let DOT_KEY = "l";
+let DASH_KEY = "k";
+let DOT_LENGTH = 200;
+let DASH_LENGTH = DOT_LENGTH * 3;
+let PAUSE_LENGTH = DOT_LENGTH;
+
 /* KEY EVENTS */
 // StraightKey only
 const handleKeyDown = (e) => {
-  if (e.key === " " && !e.repeat) {
+  if (e.key === STRAIGHT_KEY && !e.repeat) {
     socket.emit("message", "d");
     myBeep = new Beep(frequency);
     myBeep.init();
@@ -22,15 +34,66 @@ const handleKeyDown = (e) => {
 };
 
 const handleKeyUp = (e) => {
-  if (e.key === " ") {
+  if (e.key === STRAIGHT_KEY) {
     socket.emit("message", "u");
     myBeep.stop();
   }
 };
 
+const handleDotKeyDown = (e) => {
+  if (e.key === DOT_KEY && !e.repeat) {
+    clearInterval(i);
+    i = setInterval(() => {
+      socket.emit("message", "d");
+      myBeep = new Beep(frequency);
+      myBeep.init();
+      myBeep.play();
+      setTimeout(() => {
+        socket.emit("message", "u");
+        myBeep.stop();
+      }, PAUSE_LENGTH);
+    }, DOT_LENGTH + PAUSE_LENGTH);
+  }
+};
+
+const handleDashKeyDown = (e) => {
+  if (e.key === DASH_KEY && !e.repeat) {
+    clearInterval(i);
+    i = setInterval(() => {
+      socket.emit("message", "d");
+      myBeep = new Beep(frequency);
+      myBeep.init();
+      myBeep.play();
+      setTimeout(() => {
+        socket.emit("message", "u");
+        myBeep.stop();
+      }, PAUSE_LENGTH);
+    }, DASH_LENGTH + PAUSE_LENGTH);
+  }
+};
+
+const handleDotKeyUp = (e) => {
+  if (e.key === DOT_KEY) {
+    clearInterval(i);
+  }
+};
+
+const handleDashKeyUp = (e) => {
+  if (e.key === DASH_KEY) {
+    clearInterval(i);
+  }
+};
+
 window.onload = () => {
+  // straight key
   document.addEventListener("keydown", handleKeyDown);
   document.addEventListener("keyup", handleKeyUp);
+
+  // paddle key
+  document.addEventListener("keydown", handleDotKeyDown);
+  document.addEventListener("keyup", handleDotKeyUp);
+  document.addEventListener("keydown", handleDashKeyDown);
+  document.addEventListener("keyup", handleDashKeyUp);
 };
 
 // cleanup
