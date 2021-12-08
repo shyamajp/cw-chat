@@ -24,7 +24,9 @@ io.on("connection", (socket) => {
 
   socket.on("message", (message) => {
     const user = getUser(socket.id);
-    io.in(user.room).emit("message", { user: user.name, text: message });
+    if (user) {
+      io.in(user.room).emit("message", { user: user.name, text: message });
+    }
   });
 
   socket.on("disconnect", () => {

@@ -11,6 +11,14 @@
     <ul>
       <li>Room: <span id="user-room"></span></li>
       <li>Name: <span id="user-name"></span></li>
+      <li>
+        Users:
+        <ul id="user-list"></ul>
+      </li>
+      <li>
+        Notifications:
+        <ul id="user-notifications"></ul>
+      </li>
     </ul>
     <hr />
     <form id="login-form">
@@ -27,6 +35,7 @@
     <form>
       <h2>Message</h2>
       <input id="message" />
+      <ul id="messages"></ul>
     </form>
     <script src="/socket.io/socket.io.js"></script>
     <script>
@@ -37,14 +46,29 @@
       let name = "";
 
       // listen
-      socket.on("notification", (data) => {
-        console.log("notification", data);
+      socket.on("notification", (notification) => {
+        const ul = document.getElementById("user-notifications");
+        const li = document.createElement("li");
+        li.appendChild(document.createTextNode(notification));
+        ul.appendChild(li);
       });
-      socket.on("users", (data) => {
-        console.log("users", data);
+
+      socket.on("users", (users) => {
+        const ul = document.getElementById("user-list");
+        ul.innerHTML = "";
+        users.forEach(({ name }) => {
+          const li = document.createElement("li");
+          li.appendChild(document.createTextNode(name));
+          ul.appendChild(li);
+        });
       });
-      socket.on("message", (data) => {
-        console.log("message", data);
+
+      socket.on("message", (message) => {
+        const { user, text } = message;
+        const ul = document.getElementById("messages");
+        const li = document.createElement("li");
+        li.appendChild(document.createTextNode(`${user}: ${text}`));
+        ul.appendChild(li);
       });
 
       // login
