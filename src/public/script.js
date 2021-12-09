@@ -66,14 +66,3 @@ socket.on(EventName.Message, (message) => {
   li.appendChild(document.createTextNode(`${user}: ${text}`));
   ul.appendChild(li);
 });
-
-/* FORMS */
-// login
-
-const transmitInput = document.getElementById("transmit");
-transmitInput.addEventListener("change", function () {
-  const transmit = this.checked;
-  const mode = transmit ? "transmit" : "receive";
-  socket.emit(EventName.Mode, mode);
-  getUser().transmit = transmit;
-});
