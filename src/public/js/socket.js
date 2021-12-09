@@ -48,9 +48,4 @@ socket.on(EventName.Message, (message) => {
       getOtherBeep(id).stop();
     }
   }
-
-  const ul = document.getElementById("messages");
-  const li = document.createElement("li");
-  li.appendChild(document.createTextNode(`${user}: ${text}`));
-  ul.appendChild(li);
 });

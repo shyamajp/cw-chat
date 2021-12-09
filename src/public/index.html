@@ -11,20 +11,46 @@
   <body>
     <header>CW Chat</header>
     <main>
-      <li>Room: <span id="user-room"></span></li>
-      <li>Name: <span id="user-name"></span></li>
-      <li>Frequency: <span id="user-frequency"></span></li>
-      <li>
-        Users:
-        <ul id="user-list"></ul>
-      </li>
-      <li>
-        Notifications:
-        <ul id="user-notifications"></ul>
-      </li>
+      <h2>Login</h2>
       <login-form></login-form>
+      <hr />
+      <h2>Info</h2>
+      <ul>
+        <li>Room: <span id="user-room"></span></li>
+        <li>Name: <span id="user-name"></span></li>
+        <li>Frequency: <span id="user-frequency"></span></li>
+        <li>
+          Users:
+          <ul id="user-list"></ul>
+        </li>
+        <li>
+          Rooms:
+          <ul id="room-list"></ul>
+        </li>
+      </ul>
+      <hr />
+      <h2>Notifications</h2>
+      <ul id="user-notifications">
+        <li>user-a left</li>
+        <li>user-a left</li>
+        <li>user-a left</li>
+        <li>user-a left</li>
+      </ul>
+      <hr />
+      <h2>Settings</h2>
+      <form id="settings-form">
+        <div class="form-item">
+          <label for="frequency">frequency</label>
+          <input type="range" min="440" max="1600" id="frequency" name="frequency" />
+        </div>
+        <div class="form-item">
+          <label for="frequency">speed</label>
+          <input type="range" min="440" max="1600" id="frequency" name="frequency" />
+        </div>
+      </form>
+      <hr />
+      <h2>CQ</h2>
       <tranceiver-toggle></tranceiver-toggle>
-      <ul id="messages"></ul>
     </main>
     <footer>&copy; shyamajp</footer>
     <script src="/socket.io/socket.io.js"></script>
