@@ -11,18 +11,21 @@
 
 - [x] organize data
 - [x] make fully functional CW communication
-- [ ] add styles
 
 > NOTE: decided to nuke the old project and start over a fresh one.
 > Initially I was using websocket but I found out that socket.io would be 100x easier for what I wanted to achieve.
 
 # Thu
 
-- [ ] add styles
-- [ ] add tests for CI?
-- [ ] (manually) test builds and make it deploy ready
+- [x] make production ready / add error handling / add logger
+- [x] separate logic / components
+- [x] fix bugs / reduce warnings
+- [x] add features (customization, live-time status)
+
+> NOTE: decided to go with vanilla JS
 
 # Fri
 
-- [ ] fix bugs
+- [ ] separate components
+- [ ] add css
 - [ ] deploy
