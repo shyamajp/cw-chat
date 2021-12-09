@@ -21,11 +21,18 @@ socket.on(EventName.Users, (users) => {
 });
 
 socket.on(EventName.Rooms, (rooms) => {
-  console.log(rooms);
+  const ul = document.getElementById("room-list");
+  ul.innerHTML = "";
+  rooms.forEach((room) => {
+    const li = document.createElement("li");
+    li.appendChild(document.createTextNode(room));
+    ul.appendChild(li);
+  });
 });
 
 socket.on(EventName.UserCount, (userCount) => {
-  console.log(userCount);
+  const span = document.getElementById("user-count");
+  span.innerHTML = userCount;
 });
 
 socket.on(EventName.Mode, (mode) => {
