@@ -38,6 +38,12 @@ export const setOtherBeep = (id, beep) => {
   otherBeeps[id] = beep;
 };
 
+export const stopAllOtherBeeps = () => {
+  Object.values(otherBeeps).forEach((beep) => {
+    beep.stop();
+  })
+}
+
 export const startBeep = (beep, socket, transmit = true) => {
   if (transmit) {
     socket.emit(EventName.Message, "d");
