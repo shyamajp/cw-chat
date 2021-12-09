@@ -9,7 +9,6 @@ const { getRooms } = require("./utils");
 
 const PORT = 3000;
 
-// TOOD: add error handling
 io.on("connection", (socket) => {
   console.log("User connected");
   // All: Number of all connected clients
@@ -19,45 +18,68 @@ io.on("connection", (socket) => {
 
   socket.on(EventName.Login, ({ name, room, frequency }) => {
     const { user, error } = addUser(socket.id, name, room, frequency);
-    if (user) {
-      socket.join(room);
-      // Other users in room: User entering notification
-      socket.to(room).emit(EventName.notification, `${name} just entered the room`);
-      // All users in room: All users in room
-      io.in(room).emit(EventName.Users, getUsers(room));
+    if (error || !user) {
+      console.error(error);
+      // Current user: Error
+      io.to(socket.id).emit(EventName.Error, error);
+      return;
     }
+    socket.join(room);
+    // Other users in room: User entering notification
+    socket.to(room).emit(EventName.Notification, `${name} just entered the room`);
+    // All users in room: All users in room
+    io.in(room).emit(EventName.Users, getUsers(room));
   });
 
-  socket.on(EventName.message, (message) => {
+  socket.on(EventName.Message, (message) => {
     const user = getUser(socket.id);
-    if (user) {
-      // Other users in room: Morse code
-      socket.to(user.room).emit(EventName.message, {
-        id: socket.id,
-        user: user.name,
-        text: message,
-        frequency: user.frequency,
-      });
+    if (!user) {
+      // Current user: Error
+      io.to(socket.id).emit(EventName.Error, "Could not find a user.");
+      return;
     }
+    // Other users in room: Morse code
+    socket.to(user.room).emit(EventName.Message, {
+      id: socket.id,
+      user: user.name,
+      text: message,
+      frequency: user.frequency,
+    });
   });
 
   socket.on("disconnect", () => {
     console.log("User disconnected");
     const user = deleteUser(socket.id);
-    if (user) {
-      // Other users in room: User leaving notification
-      socket.to(user.room).emit(EventName.notification, `${user.name} just left the room`);
-      // Other users in room: All users in room
-      socket.to(user.room).emit(EventName.Users, getUsers(user.room));
+    if (!user) {
+      // Current user: Error
+      io.to(socket.id).emit(EventName.Error, "Could not find a user.");
+      return;
     }
+    // Other users in room: User leaving notification
+    socket.to(user.room).emit(EventName.Notification, `${user.name} just left the room`);
+    // Other users in room: All users in room
+    socket.to(user.room).emit(EventName.Users, getUsers(user.room));
     // Broadcast: Number of all connected clients
     io.emit(EventName.Rooms, io.engine.clientsCount);
   });
 });
 
 app.use(express.static(__dirname + "/public"));
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname + "/public/index.html"));
+
+/* ROUTES */
+
+// home
+app.get("/", (req, res, next) => {
+  try {
+    res.sendFile(path.join(__dirname + "/public/index.html"));
+  } catch (error) {
+    next(error);
+  }
+});
+
+// 404
+app.use((req, res, next) => {
+  res.status(404).sendFile(path.join(__dirname + "/public/404.html"));
 });
 
 server.listen(PORT, () => {

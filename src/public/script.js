@@ -111,6 +111,10 @@ socket.on("user count", (userCount) => {
   console.log(userCount);
 });
 
+socket.on("error message", (error) => {
+  console.log(error);
+});
+
 socket.on("message", (message) => {
   const { id, user, text, frequency: othersFrequency } = message;
 
