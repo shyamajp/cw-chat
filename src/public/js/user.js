@@ -1,7 +1,13 @@
 let myUser;
 
+const KeyTypes = {
+  Straight: "straight",
+  Paddle: "addle",
+};
+
 const DEFAULT_FREQUENCY = 440;
 const DEFAULT_SPEED = 100;
+const DEFAULT_KEY_TYPE = KeyTypes.Straight;
 
 export class User {
   constructor(name, room, frequency, speed = DEFAULT_SPEED) {
@@ -10,6 +16,7 @@ export class User {
     this._frequency = frequency;
     this._speed = speed;
     this._transmit = false;
+    this._keyType = DEFAULT_KEY_TYPE;
   }
 
   get frequency() {
@@ -17,17 +24,27 @@ export class User {
   }
 
   set frequency(val) {
-    if (typeof val !== "number") {
-      this._frequency = DEFAULT_FREQUENCY;
-    } else if (val >= 440 && val <= 1600) {
-      this._frequency = DEFAULT_FREQUENCY;
-    } else {
+    if (val >= 440 && val <= 1600) {
       this._frequency = val;
+    } else {
+      this._frequency = DEFAULT_FREQUENCY;
     }
   }
 
   get speed() {
     return this._speed || DEFAULT_FREQUENCY;
+  }
+
+  set speed(val) {
+    if (val >= 50 && val <= 200) {
+      this._frequency = val;
+    } else {
+      this._frequency = DEFAULT_FREQUENCY;
+    }
+  }
+
+  get transmit() {
+    return this._transmit;
   }
 
   set transmit(val) {
@@ -38,17 +55,15 @@ export class User {
     }
   }
 
-  get transmit() {
-    return this._transmit;
+  get keyType() {
+    return this._keyType;
   }
 
-  set speed(val) {
-    if (typeof val !== "number") {
-      this._speed = DEFAULT_SPEED;
-    } else if (val >= 50 && val <= 200) {
-      this._speed = DEFAULT_SPEED;
+  set keyType(val) {
+    if (val === KeyTypes.Paddle) {
+      this._keyType = KeyTypes.Paddle;
     } else {
-      this._speed = val;
+      this._keyType = DEFAULT_KEY_TYPE;
     }
   }
 }
