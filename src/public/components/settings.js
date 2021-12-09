@@ -26,7 +26,7 @@ class Settings extends HTMLElement {
     const frequency = e.target.frequency?.value;
     const keyType = e.target.keyType?.value;
 
-    socket.emit(EventName.Settings, { frequency });
+    socket.emit(EventName.Settings, frequency);
 
     user.speed = speed;
     user.frequency = frequency;

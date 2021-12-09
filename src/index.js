@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 const server = require("http").createServer(app);
 const io = require("socket.io")(server);
-const { addUser, getUser, deleteUser, getUsers } = require("./userHandlers");
+const { addUser, getUser, updateUser, deleteUser, getUsers } = require("./userHandlers");
 const { EventName } = require("./types");
 const { getRooms } = require("./utils");
 const { logger } = require("./logger");
@@ -58,11 +58,22 @@ io.on("connection", (socket) => {
       io.to(socket.id).emit(EventName.Error, "Could not find a user");
       return;
     }
-    // Other users in room: Current mode
-    io.in(user.room).emit(EventName.Mode, {
-      id: socket.id,
-      mode,
-    });
+    updateUser(socket.id, { mode });
+    // All users in room: Current mode
+    io.in(user.room).emit(EventName.Mode, getUsers(user.room));
+  });
+
+  socket.on(EventName.Settings, (frequency) => {
+    let user = getUser(socket.id);
+    if (!user) {
+      logger.error(`[${socket.id}] Could not find a user`);
+      // Current user: Error
+      io.to(socket.id).emit(EventName.Error, "Could not find a user");
+      return;
+    }
+    updateUser(socket.id, { frequency });
+    // All users in room: Current frequency
+    io.in(user.room).emit(EventName.Mode, getUsers(user.room));
   });
 
   socket.on("disconnect", () => {

@@ -1,6 +1,6 @@
 const users = [];
 
-const addUser = (id, name, room, frequency) => {
+const addUser = (id, name, room) => {
   const existingUser = users.find((user) => user.name.trim().toLowerCase() === name.trim().toLowerCase());
 
   if (existingUser) return { error: "Username has already been taken" };
@@ -8,7 +8,7 @@ const addUser = (id, name, room, frequency) => {
   if (!name) return { error: "Username is required" };
   if (!room) return { error: "Room is required" };
 
-  const user = { id, name, room, frequency };
+  const user = { id, name, room };
   users.push(user);
   return { user };
 };
@@ -16,6 +16,13 @@ const addUser = (id, name, room, frequency) => {
 const getUser = (id) => {
   const user = users.find((user) => user.id == id);
   return user;
+};
+
+const updateUser = (id, obj) => {
+  const index = users.findIndex((user) => user.id === id);
+  if (index !== -1) {
+    users[index] = { ...users[index], ...obj };
+  }
 };
 
 const deleteUser = (id) => {
@@ -27,5 +34,6 @@ const getUsers = (room) => users.filter((user) => user.room === room);
 
 exports.addUser = addUser;
 exports.getUser = getUser;
+exports.updateUser = updateUser;
 exports.deleteUser = deleteUser;
 exports.getUsers = getUsers;

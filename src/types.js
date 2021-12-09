@@ -3,6 +3,7 @@ const EventName = {
   Login: "login",
   Users: "users",
   Mode: "mode",
+  Settings: "settings",
   UserCount: "user count",
   Notification: "notification",
   Message: "message",
