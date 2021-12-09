@@ -1,12 +1,9 @@
 import { Beep, getMyBeep, setMyBeep, getOtherBeep, setOtherBeep } from "./js/beep.js";
 import { EventName } from "./js/types.js";
 import { socket } from "./js/socket.js";
+import { getUser, setUser, User } from "./js/user.js";
 
 /* DATA */
-let room = "";
-let name = "";
-let frequency;
-
 // keys
 let i;
 
@@ -17,9 +14,6 @@ let DASH_KEY = "l";
 let DOT_LENGTH = 100;
 let DASH_LENGTH = DOT_LENGTH * 3;
 let PAUSE_LENGTH = DOT_LENGTH;
-
-// customization
-let transmit = false;
 
 /* KEY EVENTS */
 const handleKeyUp = (e) => {
@@ -38,8 +32,9 @@ const handleKeyUp = (e) => {
 };
 
 function dot() {
+  const transmit = getUser().transmit;
   transmit && socket.emit(EventName.Message, "d");
-  const beep = new Beep(frequency);
+  const beep = new Beep(getUser().frequency);
   setMyBeep(beep);
   beep.play();
   setTimeout(() => {
@@ -50,8 +45,9 @@ function dot() {
 }
 
 function dash() {
+  const transmit = getUser().transmit;
   transmit && socket.emit(EventName.Message, "d");
-  const beep = new Beep(frequency);
+  const beep = new Beep(getUser().frequency);
   setMyBeep(beep);
   beep.play();
   setTimeout(() => {
@@ -62,10 +58,11 @@ function dash() {
 }
 
 const handleKeyDown = (e) => {
+  const user = getUser();
   // straight
   if (e.key === STRAIGHT_KEY && !e.repeat) {
-    transmit && socket.emit(EventName.Message, "d");
-    setMyBeep(new Beep(frequency));
+    user.transmit && socket.emit(EventName.Message, "d");
+    setMyBeep(new Beep(user.frequency));
     getMyBeep().play();
   }
   // dot
@@ -125,13 +122,13 @@ socket.on(EventName.Error, (error) => {
 socket.on(EventName.Message, (message) => {
   const { id, user, text, frequency: othersFrequency } = message;
 
-  if (!transmit) {
-    const beep = getOtherBeep(id);
+  if (!getUser().transmit) {
     if (text === "d") {
-      setOtherBeep(id, new Beep(othersFrequency));
+      const beep = new Beep(othersFrequency);
+      setOtherBeep(id, beep);
       beep.play();
     } else if (text === "u") {
-      beep.stop();
+      getOtherBeep(id).stop();
     }
   }
 
@@ -147,11 +144,11 @@ const loginForm = document.getElementById("login-form");
 loginForm.addEventListener("submit", function (e) {
   e.preventDefault();
 
-  room = e.target.room?.value;
-  name = e.target.name?.value;
-  frequency = e.target.frequency?.value;
+  const room = e.target.room?.value;
+  const name = e.target.name?.value;
+  const frequency = e.target.frequency?.value;
   socket.emit(EventName.Login, { room, name, frequency });
-
+  setUser(new User(name, room, frequency));
   document.getElementById("user-room").textContent = room;
   document.getElementById("user-name").textContent = name;
   document.getElementById("user-frequency").textContent = frequency;
@@ -159,7 +156,8 @@ loginForm.addEventListener("submit", function (e) {
 
 const transmitInput = document.getElementById("transmit");
 transmitInput.addEventListener("change", function () {
-  transmit = this.checked;
+  const transmit = this.checked;
   const mode = transmit ? "transmit" : "receive";
   socket.emit(EventName.Mode, mode);
+  getUser().transmit = transmit;
 });
