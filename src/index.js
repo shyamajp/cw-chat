@@ -6,11 +6,12 @@ const io = require("socket.io")(server);
 const { addUser, getUser, deleteUser, getUsers } = require("./users");
 const { EventName } = require("./types");
 const { getRooms } = require("./utils");
+const { logger } = require("./logger");
 
 const PORT = 3000;
 
 io.on("connection", (socket) => {
-  console.log("User connected");
+  logger.info(`[${socket.id}] connected`);
   // All: Number of all connected clients
   io.emit(EventName.UserCount, io.engine.clientsCount);
   // Current user: Current available rooms
@@ -19,12 +20,14 @@ io.on("connection", (socket) => {
   socket.on(EventName.Login, ({ name, room, frequency }) => {
     const { user, error } = addUser(socket.id, name, room, frequency);
     if (error || !user) {
-      console.error(error);
+      logger.error(`[${socket.id}] ${error}`);
       // Current user: Error
       io.to(socket.id).emit(EventName.Error, error);
       return;
     }
     socket.join(room);
+    logger.info(`[${socket.id}] Joined room "${room}"`);
+
     // Other users in room: User entering notification
     socket.to(room).emit(EventName.Notification, `${name} just entered the room`);
     // All users in room: All users in room
@@ -50,8 +53,9 @@ io.on("connection", (socket) => {
   socket.on(EventName.Mode, (mode) => {
     const user = getUser(socket.id);
     if (!user) {
+      logger.error(`[${socket.id}] Could not find a user`);
       // Current user: Error
-      io.to(socket.id).emit(EventName.Error, "Could not find a user.");
+      io.to(socket.id).emit(EventName.Error, "Could not find a user");
       return;
     }
     // Other users in room: Current mode
@@ -62,13 +66,15 @@ io.on("connection", (socket) => {
   });
 
   socket.on("disconnect", () => {
-    console.log("User disconnected");
+    logger.info(`[${socket.id}] Disconnected`);
     const user = deleteUser(socket.id);
     if (!user) {
+      logger.error(`[${socket.id}] Could not find a user`);
       // Current user: Error
-      io.to(socket.id).emit(EventName.Error, "Could not find a user.");
+      io.to(socket.id).emit(EventName.Error, "Could not find a user");
       return;
     }
+    logger.info(`[${socket.id}] Left room "${user.room}"`);
     // Other users in room: User leaving notification
     socket.to(user.room).emit(EventName.Notification, `${user.name} just left the room`);
     // Other users in room: All users in room
@@ -97,5 +103,5 @@ app.use((req, res, next) => {
 });
 
 server.listen(PORT, () => {
-  console.log(`Listening to ${PORT}`);
+  logger.info(`Listening to ${PORT}`);
 });
