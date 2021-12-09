@@ -157,16 +157,6 @@ loginForm.addEventListener("submit", function (e) {
   document.getElementById("user-frequency").textContent = frequency;
 });
 
-// message
-const input = document.getElementById("message");
-input.addEventListener("input", function (e) {
-  const message = e.target.value;
-  if (message) {
-    socket.emit(EventName.Message, message);
-    input.value = "";
-  }
-});
-
 const transmitInput = document.getElementById("transmit");
 transmitInput.addEventListener("change", function () {
   transmit = this.checked;
