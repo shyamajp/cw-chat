@@ -31,13 +31,7 @@
       <input id="name" name="name" />
       <br />
       <label for="frequency">frequency</label>
-      <input
-        type="range"
-        min="440"
-        max="1600"
-        id="frequency"
-        name="frequency"
-      />
+      <input type="range" min="440" max="1600" id="frequency" name="frequency" />
       <br />
       <button type="submit">login</button>
     </form>
@@ -47,6 +41,9 @@
       <input id="message" />
       <ul id="messages"></ul>
     </form>
+    <hr />
+    <h2>Customization</h2>
+    <input type="checkbox" name="transmit" id="transmit" /><span>Transmit</span>
     <script src="/socket.io/socket.io.js"></script>
     <script type="module" src="script.js"></script>
   </body>

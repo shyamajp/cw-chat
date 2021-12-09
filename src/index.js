@@ -47,6 +47,20 @@ io.on("connection", (socket) => {
     });
   });
 
+  socket.on(EventName.Mode, (mode) => {
+    const user = getUser(socket.id);
+    if (!user) {
+      // Current user: Error
+      io.to(socket.id).emit(EventName.Error, "Could not find a user.");
+      return;
+    }
+    // Other users in room: Current mode
+    io.in(user.room).emit(EventName.Mode, {
+      id: socket.id,
+      mode,
+    });
+  });
+
   socket.on("disconnect", () => {
     console.log("User disconnected");
     const user = deleteUser(socket.id);

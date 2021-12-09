@@ -1,4 +1,4 @@
-const EventName = {
+export const EventName = {
   Rooms: "rooms",
   Login: "login",
   Users: "users",
@@ -8,5 +8,3 @@ const EventName = {
   Message: "message",
   Error: "error message",
 };
-
-exports.EventName = EventName;
