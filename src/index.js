@@ -60,7 +60,7 @@ io.on("connection", (socket) => {
     // Other users in room: All users in room
     socket.to(user.room).emit(EventName.Users, getUsers(user.room));
     // Broadcast: Number of all connected clients
-    io.emit(EventName.Rooms, io.engine.clientsCount);
+    io.emit(EventName.UserCount, io.engine.clientsCount);
   });
 });
 
