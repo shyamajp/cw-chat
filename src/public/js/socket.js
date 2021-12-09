@@ -35,10 +35,6 @@ socket.on(EventName.UserCount, (userCount) => {
   span.innerHTML = userCount;
 });
 
-socket.on(EventName.Error, (error) => {
-  console.log(error);
-});
-
 socket.on(EventName.Message, (message) => {
   const { id, text, frequency: othersFrequency } = message;
 

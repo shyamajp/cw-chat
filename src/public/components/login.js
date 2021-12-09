@@ -21,9 +21,22 @@ class Login extends HTMLElement {
     const room = e.target.room?.value;
     const name = e.target.name?.value;
     socket.emit(EventName.Login, { room, name });
-    setUser(new User(name, room));
-    document.getElementById("user-room").textContent = room;
-    document.getElementById("user-name").textContent = name;
+
+    let errorMessage = "";
+    socket.on(EventName.Error, (error) => {
+      errorMessage = error;
+    });
+    setTimeout(() => {
+      const span = document.getElementById("error-message");
+      if (!errorMessage) {
+        span.innerHTML = "";
+        setUser(new User(name, room));
+        document.getElementById("user-room").textContent = room;
+        document.getElementById("user-name").textContent = name;
+      } else {
+        span.innerHTML = errorMessage;
+      }
+    }, 100);
   }
 
   render() {
@@ -36,6 +49,7 @@ class Login extends HTMLElement {
       <div class='form-item'>
         <label for="name">name</label>
         <input id="name" name="name" />
+        <span id='error-message'></span>
       </div>
       <div class='form-item'>
         <button type="submit">login</button>
