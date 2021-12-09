@@ -8,7 +8,7 @@ const { EventName } = require("./types");
 const { getRooms } = require("./utils");
 const { logger } = require("./logger");
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 io.on("connection", (socket) => {
   logger.info(`[${socket.id}] connected`);
