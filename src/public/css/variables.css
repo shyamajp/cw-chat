@@ -1,0 +1,8 @@
+:root {
+  --primary: rgba(100, 98, 180);
+  --secondary: rgba(83, 191, 217);
+  --background-white: white;
+  --text-gray-strong: #333;
+  --text-gray-normal: #555;
+  --text-gray-weak: #777;
+}

@@ -4,11 +4,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Test</title>
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <title>CW Chat</title>
   </head>
   <body>
-    <h2>User</h2>
-    <ul>
+    <header>CW Chat</header>
+    <main>
       <li>Room: <span id="user-room"></span></li>
       <li>Name: <span id="user-name"></span></li>
       <li>Frequency: <span id="user-frequency"></span></li>
@@ -20,13 +22,11 @@
         Notifications:
         <ul id="user-notifications"></ul>
       </li>
-    </ul>
-    <hr />
-    <login-form></login-form>
-    <tranceiver-toggle></tranceiver-toggle>
-    <hr />
-    <h2>Message</h2>
-    <ul id="messages"></ul>
+      <login-form></login-form>
+      <tranceiver-toggle></tranceiver-toggle>
+      <ul id="messages"></ul>
+    </main>
+    <footer>&copy; shyamajp</footer>
     <script src="/socket.io/socket.io.js"></script>
     <script type="module" src="script.js"></script>
     <script type="module" src="components/login.js"></script>
