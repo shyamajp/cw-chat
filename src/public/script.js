@@ -103,6 +103,14 @@ socket.on("users", (users) => {
   });
 });
 
+socket.on("rooms", (rooms) => {
+  console.log(rooms);
+});
+
+socket.on("user count", (userCount) => {
+  console.log(userCount);
+});
+
 socket.on("message", (message) => {
   const { id, user, text, frequency: othersFrequency } = message;
 

@@ -4,26 +4,35 @@ const app = express();
 const server = require("http").createServer(app);
 const io = require("socket.io")(server);
 const { addUser, getUser, deleteUser, getUsers } = require("./users");
+const { EventName } = require("./types");
+const { getRooms } = require("./utils");
 
 const PORT = 3000;
 
 // TOOD: add error handling
 io.on("connection", (socket) => {
   console.log("User connected");
+  // All: Number of all connected clients
+  io.emit(EventName.UserCount, io.engine.clientsCount);
+  // Current user: Current available rooms
+  io.to(socket.id).emit(EventName.Rooms, getRooms(io.sockets.adapter.rooms));
 
-  socket.on("login", ({ name, room, frequency }) => {
+  socket.on(EventName.Login, ({ name, room, frequency }) => {
     const { user, error } = addUser(socket.id, name, room, frequency);
     if (user) {
       socket.join(room);
-      socket.to(room).emit("notification", `${name} just entered the room`);
-      io.in(room).emit("users", getUsers(room));
+      // Other users in room: User entering notification
+      socket.to(room).emit(EventName.notification, `${name} just entered the room`);
+      // All users in room: All users in room
+      io.in(room).emit(EventName.Users, getUsers(room));
     }
   });
 
-  socket.on("message", (message) => {
+  socket.on(EventName.message, (message) => {
     const user = getUser(socket.id);
     if (user) {
-      socket.to(user.room).emit("message", {
+      // Other users in room: Morse code
+      socket.to(user.room).emit(EventName.message, {
         id: socket.id,
         user: user.name,
         text: message,
@@ -36,9 +45,13 @@ io.on("connection", (socket) => {
     console.log("User disconnected");
     const user = deleteUser(socket.id);
     if (user) {
-      socket.to(user.room).emit("notification", `${user.name} just left the room`);
-      io.in(user.room).emit("users", getUsers(user.room));
+      // Other users in room: User leaving notification
+      socket.to(user.room).emit(EventName.notification, `${user.name} just left the room`);
+      // Other users in room: All users in room
+      socket.to(user.room).emit(EventName.Users, getUsers(user.room));
     }
+    // Broadcast: Number of all connected clients
+    io.emit(EventName.Rooms, io.engine.clientsCount);
   });
 });
 
