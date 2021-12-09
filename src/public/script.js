@@ -126,11 +126,13 @@ socket.on(EventName.Error, (error) => {
 socket.on(EventName.Message, (message) => {
   const { id, user, text, frequency: othersFrequency } = message;
 
-  if (text === "d") {
-    otherBeeps[id] = new Beep(othersFrequency);
-    otherBeeps[id].play();
-  } else if (text === "u") {
-    otherBeeps[id].stop();
+  if (!transmit) {
+    if (text === "d") {
+      otherBeeps[id] = new Beep(othersFrequency);
+      otherBeeps[id].play();
+    } else if (text === "u") {
+      otherBeeps[id].stop();
+    }
   }
 
   const ul = document.getElementById("messages");
