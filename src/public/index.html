@@ -22,19 +22,7 @@
       </li>
     </ul>
     <hr />
-    <form id="login-form">
-      <h2>Login</h2>
-      <label for="room">room</label>
-      <input id="room" name="room" />
-      <br />
-      <label for="name">name</label>
-      <input id="name" name="name" />
-      <br />
-      <label for="frequency">frequency</label>
-      <input type="range" min="440" max="1600" id="frequency" name="frequency" />
-      <br />
-      <button type="submit">login</button>
-    </form>
+    <login-form></login-form>
     <hr />
     <h2>Message</h2>
     <ul id="messages"></ul>
@@ -43,5 +31,6 @@
     <input type="checkbox" name="transmit" id="transmit" /><span>Transmit</span>
     <script src="/socket.io/socket.io.js"></script>
     <script type="module" src="script.js"></script>
+    <script type="module" src="components/login.js"></script>
   </body>
 </html>

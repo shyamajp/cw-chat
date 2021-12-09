@@ -1,7 +1,7 @@
 import { Beep, getOtherBeep, setOtherBeep } from "./js/beep.js";
 import { EventName } from "./js/types.js";
 import { socket } from "./js/socket.js";
-import { getUser, setUser, User } from "./js/user.js";
+import { getUser } from "./js/user.js";
 import { handleKeyUp, handleKeyDown } from "./js/keys.js";
 
 window.onload = () => {
@@ -69,19 +69,6 @@ socket.on(EventName.Message, (message) => {
 
 /* FORMS */
 // login
-const loginForm = document.getElementById("login-form");
-loginForm.addEventListener("submit", function (e) {
-  e.preventDefault();
-
-  const room = e.target.room?.value;
-  const name = e.target.name?.value;
-  const frequency = e.target.frequency?.value;
-  socket.emit(EventName.Login, { room, name, frequency });
-  setUser(new User(name, room, frequency));
-  document.getElementById("user-room").textContent = room;
-  document.getElementById("user-name").textContent = name;
-  document.getElementById("user-frequency").textContent = frequency;
-});
 
 const transmitInput = document.getElementById("transmit");
 transmitInput.addEventListener("change", function () {
