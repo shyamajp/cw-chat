@@ -40,7 +40,7 @@ socket.on(EventName.Error, (error) => {
 });
 
 socket.on(EventName.Message, (message) => {
-  const { id, user, text, frequency: othersFrequency } = message;
+  const { id, text, frequency: othersFrequency } = message;
 
   if (!getUser().transmit) {
     if (text === "d") {
@@ -48,7 +48,7 @@ socket.on(EventName.Message, (message) => {
       setOtherBeep(id, beep);
       beep.play();
     } else if (text === "u") {
-      getOtherBeep(id).stop();
+      getOtherBeep(id)?.stop();
     }
   }
 });
