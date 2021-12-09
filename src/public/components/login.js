@@ -20,12 +20,10 @@ class Login extends HTMLElement {
     e.preventDefault();
     const room = e.target.room?.value;
     const name = e.target.name?.value;
-    const frequency = e.target.frequency?.value;
-    socket.emit(EventName.Login, { room, name, frequency });
-    setUser(new User(name, room, frequency));
+    socket.emit(EventName.Login, { room, name });
+    setUser(new User(name, room));
     document.getElementById("user-room").textContent = room;
     document.getElementById("user-name").textContent = name;
-    document.getElementById("user-frequency").textContent = frequency;
   }
 
   render() {
@@ -38,10 +36,6 @@ class Login extends HTMLElement {
       <div class='form-item'>
         <label for="name">name</label>
         <input id="name" name="name" />
-      </div>
-      <div class='form-item'>
-        <label for="frequency">frequency</label>
-        <input type="range" min="440" max="1600" id="frequency" name="frequency" />
       </div>
       <div class='form-item'>
         <button type="submit">login</button>

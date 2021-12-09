@@ -17,8 +17,8 @@ io.on("connection", (socket) => {
   // Current user: Current available rooms
   io.to(socket.id).emit(EventName.Rooms, getRooms(io.sockets.adapter.rooms));
 
-  socket.on(EventName.Login, ({ name, room, frequency }) => {
-    const { user, error } = addUser(socket.id, name, room, frequency);
+  socket.on(EventName.Login, ({ name, room }) => {
+    const { user, error } = addUser(socket.id, name, room);
     if (error || !user) {
       logger.error(`[${socket.id}] ${error}`);
       // Current user: Error
