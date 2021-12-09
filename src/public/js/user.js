@@ -1,8 +1,8 @@
 let myUser;
 
-const KeyTypes = {
+export const KeyTypes = {
   Straight: "straight",
-  Paddle: "addle",
+  Paddle: "paddle",
 };
 
 const DEFAULT_FREQUENCY = 440;
@@ -44,7 +44,7 @@ export class User {
   }
 
   get transmit() {
-    return this._transmit;
+    return this._transmit || false;
   }
 
   set transmit(val) {
@@ -56,7 +56,7 @@ export class User {
   }
 
   get keyType() {
-    return this._keyType;
+    return this._keyType || DEFAULT_KEY_TYPE;
   }
 
   set keyType(val) {
