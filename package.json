@@ -4,7 +4,8 @@
   "description": "An online chat application in morse code",
   "main": "src/index.js",
   "scripts": {
-    "start": "pm2 start ecosystem.json",
+    "start": "node src/index.js",
+    "start:production": "pm2 start ecosystem.json",
     "stop": "pm2 stop ecosystem.json",
     "delete": "pm2 delete ecosystem.json",
     "restart": "pm2 reload ecosystem.json",
