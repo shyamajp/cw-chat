@@ -1,15 +1,11 @@
-const socket = io();
-import { Beep } from "./js/beep.js";
+import { Beep, getMyBeep, setMyBeep, getOtherBeep, setOtherBeep } from "./js/beep.js";
 import { EventName } from "./js/types.js";
+import { socket } from "./js/socket.js";
 
 /* DATA */
 let room = "";
 let name = "";
 let frequency;
-
-// beeps
-let myBeep;
-let otherBeeps = {};
 
 // keys
 let i;
@@ -27,14 +23,15 @@ let transmit = false;
 
 /* KEY EVENTS */
 const handleKeyUp = (e) => {
+  const beep = getMyBeep();
   // straight
   if (e.key === STRAIGHT_KEY) {
-    myBeep.stop();
+    beep.stop();
     transmit && socket.emit(EventName.Message, "u");
   }
   // paddle
   else if (e.key === DOT_KEY || e.key === DASH_KEY) {
-    myBeep.stop();
+    beep.stop();
     clearInterval(i);
     i = undefined;
   }
@@ -42,22 +39,24 @@ const handleKeyUp = (e) => {
 
 function dot() {
   transmit && socket.emit(EventName.Message, "d");
-  myBeep = new Beep(frequency);
-  myBeep.play();
+  const beep = new Beep(frequency);
+  setMyBeep(beep);
+  beep.play();
   setTimeout(() => {
     transmit && socket.emit(EventName.Message, "u");
-    myBeep.stop();
+    beep.stop();
   }, DOT_LENGTH);
   return dot;
 }
 
 function dash() {
   transmit && socket.emit(EventName.Message, "d");
-  myBeep = new Beep(frequency);
-  myBeep.play();
+  const beep = new Beep(frequency);
+  setMyBeep(beep);
+  beep.play();
   setTimeout(() => {
     transmit && socket.emit(EventName.Message, "u");
-    myBeep.stop();
+    beep.stop();
   }, DASH_LENGTH);
   return dash;
 }
@@ -66,8 +65,8 @@ const handleKeyDown = (e) => {
   // straight
   if (e.key === STRAIGHT_KEY && !e.repeat) {
     transmit && socket.emit(EventName.Message, "d");
-    myBeep = new Beep(frequency);
-    myBeep.play();
+    setMyBeep(new Beep(frequency));
+    getMyBeep().play();
   }
   // dot
   else if (e.key === DOT_KEY && !e.repeat && !i) {
@@ -127,11 +126,12 @@ socket.on(EventName.Message, (message) => {
   const { id, user, text, frequency: othersFrequency } = message;
 
   if (!transmit) {
+    const beep = getOtherBeep(id);
     if (text === "d") {
-      otherBeeps[id] = new Beep(othersFrequency);
-      otherBeeps[id].play();
+      setOtherBeep(id, new Beep(othersFrequency));
+      beep.play();
     } else if (text === "u") {
-      otherBeeps[id].stop();
+      beep.stop();
     }
   }
 

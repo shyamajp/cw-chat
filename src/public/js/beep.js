@@ -1,4 +1,8 @@
+import { EventName } from "./types.js";
+
 let myBeep;
+let otherBeeps = {};
+
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 export class Beep {
   constructor(frequency = 400) {
@@ -24,4 +28,27 @@ export const getMyBeep = () => {
 
 export const setMyBeep = (beep) => {
   myBeep = beep;
+};
+
+export const getOtherBeep = (id) => {
+  return otherBeeps[id];
+};
+
+export const setOtherBeep = (id, beep) => {
+  otherBeeps[id] = beep;
+};
+
+export const startBeep = (beep, socket, transmit = true) => {
+  if (transmit) {
+    socket.emit(EventName.Message, "d");
+  }
+  setMyBeep(beep);
+  beep.play();
+};
+
+export const stopBeep = (beep, socket, transmit = true) => {
+  if (transmit) {
+    socket.emit(EventName.Message, "u");
+  }
+  beep.stop();
 };
