@@ -9,16 +9,18 @@ let STRAIGHT_KEY = " ";
 let DOT_KEY = "k";
 let DASH_KEY = "l";
 
-let DOT_LENGTH = 100;
-let DASH_LENGTH = DOT_LENGTH * 3;
-let PAUSE_LENGTH = DOT_LENGTH;
+const START_SOUND = "d";
+const STOP_SOUND = "u";
+
+/* NOTE: DOT:DASH:PAUSE = 1:3:1 */
 
 export const handleKeyUp = (e) => {
   const beep = getMyBeep();
   // straight
+  if (!getUser()) return;
   if (e.key === STRAIGHT_KEY) {
     beep.stop();
-    transmit && socket.emit(EventName.Message, "u");
+    transmit && socket.emit(EventName.Message, STOP_SOUND);
   }
   // paddle
   else if (e.key === DOT_KEY || e.key === DASH_KEY) {
@@ -29,45 +31,50 @@ export const handleKeyUp = (e) => {
 };
 
 function dot() {
-  const transmit = getUser().transmit;
-  transmit && socket.emit(EventName.Message, "d");
-  const beep = new Beep(getUser().frequency);
+  const user = getUser();
+  if (!user) return;
+  const transmit = user.transmit;
+  transmit && socket.emit(EventName.Message, START_SOUND);
+  const beep = new Beep(user.frequency);
   setMyBeep(beep);
   beep.play();
   setTimeout(() => {
-    transmit && socket.emit(EventName.Message, "u");
+    transmit && socket.emit(EventName.Message, STOP_SOUND);
     beep.stop();
-  }, DOT_LENGTH);
+  }, user.speed);
   return dot;
 }
 
 function dash() {
-  const transmit = getUser().transmit;
-  transmit && socket.emit(EventName.Message, "d");
-  const beep = new Beep(getUser().frequency);
+  const user = getUser();
+  if (!user) return;
+  const transmit = user.transmit;
+  transmit && socket.emit(EventName.Message, START_SOUND);
+  const beep = new Beep(user.frequency);
   setMyBeep(beep);
   beep.play();
   setTimeout(() => {
-    transmit && socket.emit(EventName.Message, "u");
+    transmit && socket.emit(EventName.Message, STOP_SOUND);
     beep.stop();
-  }, DASH_LENGTH);
+  }, user.speed * 3);
   return dash;
 }
 
 export const handleKeyDown = (e) => {
   const user = getUser();
+  if (!user) return;
   // straight
   if (e.key === STRAIGHT_KEY && !e.repeat) {
-    user.transmit && socket.emit(EventName.Message, "d");
+    user.transmit && socket.emit(EventName.Message, START_SOUND);
     setMyBeep(new Beep(user.frequency));
     getMyBeep().play();
   }
   // dot
   else if (e.key === DOT_KEY && !e.repeat && !i) {
-    i = setInterval(dot(), DOT_LENGTH + PAUSE_LENGTH);
+    i = setInterval(dot(), user.speed * 2);
   }
   // dash
   else if (e.key === DASH_KEY && !e.repeat && !i) {
-    i = setInterval(dash(), DASH_LENGTH + PAUSE_LENGTH);
+    i = setInterval(dash(), user.speed * 4);
   }
 };

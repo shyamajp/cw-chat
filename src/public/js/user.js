@@ -37,9 +37,9 @@ export class User {
 
   set speed(val) {
     if (val >= 50 && val <= 200) {
-      this._frequency = val;
+      this._speed = val;
     } else {
-      this._frequency = DEFAULT_FREQUENCY;
+      this._speed = DEFAULT_FREQUENCY;
     }
   }
 
