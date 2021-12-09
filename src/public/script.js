@@ -1,6 +1,6 @@
 const socket = io();
-import { Beep } from "./beep.js";
-import { EventName } from "./types.js";
+import { Beep } from "./js/beep.js";
+import { EventName } from "./js/types.js";
 
 /* DATA */
 let room = "";
