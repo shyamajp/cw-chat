@@ -60,7 +60,7 @@ io.on("connection", (socket) => {
     }
     updateUser(socket.id, { mode });
     // All users in room: Current mode
-    io.in(user.room).emit(EventName.Mode, getUsers(user.room));
+    io.in(user.room).emit(EventName.Users, getUsers(user.room));
   });
 
   socket.on(EventName.Settings, (frequency) => {
@@ -73,7 +73,7 @@ io.on("connection", (socket) => {
     }
     updateUser(socket.id, { frequency });
     // All users in room: Current frequency
-    io.in(user.room).emit(EventName.Mode, getUsers(user.room));
+    io.in(user.room).emit(EventName.Users, getUsers(user.room));
   });
 
   socket.on("disconnect", () => {

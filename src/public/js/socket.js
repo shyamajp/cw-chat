@@ -13,9 +13,9 @@ socket.on(EventName.Notification, (notification) => {
 socket.on(EventName.Users, (users) => {
   const ul = document.getElementById("user-list");
   ul.innerHTML = "";
-  users.forEach(({ name }) => {
+  users.forEach(({ name, mode, frequency }) => {
     const li = document.createElement("li");
-    li.appendChild(document.createTextNode(name));
+    li.appendChild(document.createTextNode(`${name} (${mode || "receive"}) (${frequency || "440"})`));
     ul.appendChild(li);
   });
 });
@@ -33,10 +33,6 @@ socket.on(EventName.Rooms, (rooms) => {
 socket.on(EventName.UserCount, (userCount) => {
   const span = document.getElementById("user-count");
   span.innerHTML = userCount;
-});
-
-socket.on(EventName.Mode, (mode) => {
-  console.log(mode);
 });
 
 socket.on(EventName.Error, (error) => {
