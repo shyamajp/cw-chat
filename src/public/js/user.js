@@ -10,7 +10,7 @@ const DEFAULT_SPEED = 100;
 const DEFAULT_KEY_TYPE = KeyTypes.Straight;
 
 export class User {
-  constructor(name, room, frequency, speed = DEFAULT_SPEED) {
+  constructor(name, room, frequency = DEFAULT_FREQUENCY, speed = DEFAULT_SPEED) {
     this._name = name;
     this._room = room;
     this._frequency = frequency;
