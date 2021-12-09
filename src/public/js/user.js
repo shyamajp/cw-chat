@@ -9,7 +9,6 @@ export class User {
     this._room = room;
     this._frequency = frequency;
     this._speed = speed;
-    this._error = null;
     this._transmit = false;
   }
 
@@ -18,8 +17,13 @@ export class User {
   }
 
   set frequency(val) {
-    // TODO: add validation
-    this._frequency = val;
+    if (typeof val !== "number") {
+      this._frequency = DEFAULT_FREQUENCY;
+    } else if (val >= 440 && val <= 1600) {
+      this._frequency = DEFAULT_FREQUENCY;
+    } else {
+      this._frequency = val;
+    }
   }
 
   get speed() {
@@ -27,8 +31,11 @@ export class User {
   }
 
   set transmit(val) {
-    // TODO: add validation
-    this._transmit = val;
+    if (typeof val !== "boolean") {
+      this._transmit = false;
+    } else {
+      this._transmit = val;
+    }
   }
 
   get transmit() {
@@ -36,17 +43,13 @@ export class User {
   }
 
   set speed(val) {
-    // TODO: add validation
-    this._speed = val;
-  }
-
-  get error() {
-    return this._error;
-  }
-
-  set error(val) {
-    // TODO: add validation
-    this._error = val;
+    if (typeof val !== "number") {
+      this._speed = DEFAULT_SPEED;
+    } else if (val >= 50 && val <= 200) {
+      this._speed = DEFAULT_SPEED;
+    } else {
+      this._speed = val;
+    }
   }
 }
 
