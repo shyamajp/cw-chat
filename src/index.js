@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 const server = require("http").createServer(app);
 const io = require("socket.io")(server);
-const { addUser, getUser, deleteUser, getUsers } = require("./users");
+const { addUser, getUser, deleteUser, getUsers } = require("./userHandlers");
 const { EventName } = require("./types");
 const { getRooms } = require("./utils");
 const { logger } = require("./logger");
@@ -25,8 +25,8 @@ io.on("connection", (socket) => {
       io.to(socket.id).emit(EventName.Error, error);
       return;
     }
-    socket.join(room);
     logger.info(`[${socket.id}] Joined room "${room}"`);
+    socket.join(room);
 
     // Other users in room: User entering notification
     socket.to(room).emit(EventName.Notification, `${name} just entered the room`);
