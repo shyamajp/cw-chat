@@ -1,7 +1,9 @@
+import { DEFAULT_FREQUENCY } from "./constants.js";
+
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 
 export class Beep {
-  constructor(frequency = 400) {
+  constructor(frequency = DEFAULT_FREQUENCY) {
     this._frequency = frequency;
     this._oscillator = audioContext.createOscillator();
   }

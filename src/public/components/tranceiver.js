@@ -18,13 +18,12 @@ class Tranceiver extends HTMLElement {
 
   onChange(e) {
     const transmit = e.composedPath()[0].checked;
-    const mode = transmit ? "transmit" : "receive";
     if (transmit) {
       stopAllBeeps();
     } else {
       emitMessage(false);
     }
-    emitMode(mode);
+    emitMode(transmit);
     getUser().transmit = transmit;
   }
 

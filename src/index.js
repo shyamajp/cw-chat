@@ -26,7 +26,7 @@ io.on("connection", (socket) => {
       io.to(socket.id).emit(EventName.Error, error);
       return;
     }
-    io.to(socket.id).emit(EventName.Error, undefined);
+    io.to(socket.id).emit(EventName.Error, "");
     logger.info(`[${socket.id}] Joined room "${room}"`);
     socket.join(room);
 

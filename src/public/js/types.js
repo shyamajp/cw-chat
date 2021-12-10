@@ -14,3 +14,8 @@ export const KeyTypes = {
   Straight: "straight",
   Paddle: "paddle",
 };
+
+export const ModeTypes = {
+  Transmit: "transmit",
+  Receive: "receive",
+};

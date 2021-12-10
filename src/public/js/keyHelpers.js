@@ -5,52 +5,34 @@ import { emitMessage } from "./socketHelpers.js";
 
 let i;
 
+/* NOTE: DOT:DASH:PAUSE = 1:3:1 */
 let STRAIGHT_KEY = " ";
 let DOT_KEY = "k";
 let DASH_KEY = "l";
 
-/* NOTE: DOT:DASH:PAUSE = 1:3:1 */
-
-export const handleKeyUp = (e) => {
-  const { keyType } = getUser() || {};
-  if (!getUser()) return;
-  if (keyType === KeyTypes.Paddle) {
-    if (e.key === DOT_KEY || e.key === DASH_KEY) {
-      emitMessage(false);
-      stopBeep();
-      clearInterval(i);
-      i = undefined;
-    }
-  } else {
-    if (keyType === KeyTypes.Straight && e.key === STRAIGHT_KEY) {
-      emitMessage(false);
-      stopBeep();
-    }
-  }
-};
-
-function dot() {
+function repeat(n) {
   const { frequency, speed } = getUser();
   emitMessage(true);
   startBeep(frequency);
   setTimeout(() => {
     emitMessage(false);
     stopBeep();
-  }, speed);
+  }, speed * n);
+}
+
+function dot() {
+  repeat(1);
   return dot;
 }
 
 function dash() {
-  const { frequency, speed } = getUser();
-  emitMessage(true);
-  startBeep(frequency);
-  setTimeout(() => {
-    emitMessage(false);
-    stopBeep();
-  }, speed * 3);
+  repeat(3);
   return dash;
 }
-
+/**
+ * Makes beep on right keys when user is logged in
+ * @param  {KeyboardEvent} e
+ */
 export const handleKeyDown = (e) => {
   const { keyType, speed, frequency } = getUser() || {};
   if (!keyType) return;
@@ -67,6 +49,28 @@ export const handleKeyDown = (e) => {
       emitMessage(true);
       startBeep(frequency);
       return;
+    }
+  }
+};
+
+/**
+ * Stops beep on right keys when user is logged in
+ * @param  {KeyboardEvent} e
+ */
+export const handleKeyUp = (e) => {
+  const { keyType } = getUser() || {};
+  if (!keyType) return;
+  if (keyType === KeyTypes.Paddle) {
+    if (e.key === DOT_KEY || e.key === DASH_KEY) {
+      emitMessage(false);
+      stopBeep();
+      clearInterval(i);
+      i = undefined;
+    }
+  } else {
+    if (keyType === KeyTypes.Straight && e.key === STRAIGHT_KEY) {
+      emitMessage(false);
+      stopBeep();
     }
   }
 };
