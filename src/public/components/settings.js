@@ -1,6 +1,5 @@
-import socket from "../js/socket.js";
 import { getUser } from "../js/userHelpers.js";
-import { EventName } from "../js/types.js";
+import { emitSettings } from "../js/socketHelpers.js";
 
 class Settings extends HTMLElement {
   constructor() {
@@ -26,7 +25,7 @@ class Settings extends HTMLElement {
     const frequency = e.target.frequency?.value;
     const keyType = e.target.keyType?.value;
 
-    socket.emit(EventName.Settings, frequency);
+    emitSettings(frequency);
 
     user.speed = speed;
     user.frequency = frequency;

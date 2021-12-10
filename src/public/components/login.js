@@ -1,6 +1,5 @@
-import socket from "../js/socket.js";
+import { emitLogin, receiveError } from "../js/socketHelpers.js";
 import { createUser } from "../js/userHelpers.js";
-import { EventName } from "../js/types.js";
 
 class Login extends HTMLElement {
   constructor() {
@@ -20,13 +19,8 @@ class Login extends HTMLElement {
     e.preventDefault();
     const room = e.target.room?.value;
     const name = e.target.name?.value;
-    socket.emit(EventName.Login, { room, name });
-
-    let errorMessage = "";
-    socket.on(EventName.Error, (error) => {
-      errorMessage = error;
-    });
-    setTimeout(() => {
+    emitLogin(room, name);
+    receiveError().then((errorMessage) => {
       const span = document.getElementById("error-message");
       if (!errorMessage) {
         span.innerHTML = "";
@@ -36,7 +30,7 @@ class Login extends HTMLElement {
       } else {
         span.innerHTML = errorMessage;
       }
-    }, 100);
+    });
   }
 
   render() {

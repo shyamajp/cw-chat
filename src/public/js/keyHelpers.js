@@ -1,8 +1,7 @@
-import socket from "./socket.js";
 import { startBeep, stopBeep } from "./beepHelpers.js";
-import { EventName, KeyTypes } from "./types.js";
+import { KeyTypes } from "./types.js";
 import { getUser } from "./userHelpers.js";
-import { START_SOUND, STOP_SOUND } from "./constants.js";
+import { emitMessage } from "./socketHelpers.js";
 
 let i;
 
@@ -13,63 +12,60 @@ let DASH_KEY = "l";
 /* NOTE: DOT:DASH:PAUSE = 1:3:1 */
 
 export const handleKeyUp = (e) => {
-  const keyType = getUser()?.keyType;
+  const { keyType } = getUser() || {};
   if (!getUser()) return;
   if (keyType === KeyTypes.Paddle) {
     if (e.key === DOT_KEY || e.key === DASH_KEY) {
+      emitMessage(false);
       stopBeep();
       clearInterval(i);
       i = undefined;
     }
   } else {
     if (keyType === KeyTypes.Straight && e.key === STRAIGHT_KEY) {
+      emitMessage(false);
       stopBeep();
-      transmit && socket.emit(EventName.Message, STOP_SOUND);
     }
   }
 };
 
 function dot() {
-  const user = getUser();
-  if (!user) return;
-  const transmit = user.transmit;
-  transmit && socket.emit(EventName.Message, START_SOUND);
-  startBeep(user.frequency);
+  const { frequency, speed } = getUser();
+  emitMessage(true);
+  startBeep(frequency);
   setTimeout(() => {
-    transmit && socket.emit(EventName.Message, STOP_SOUND);
+    emitMessage(false);
     stopBeep();
-  }, user.speed);
+  }, speed);
   return dot;
 }
 
 function dash() {
-  const user = getUser();
-  if (!user) return;
-  const transmit = user.transmit;
-  transmit && socket.emit(EventName.Message, START_SOUND);
-  startBeep(user.frequency);
+  const { frequency, speed } = getUser();
+  emitMessage(true);
+  startBeep(frequency);
   setTimeout(() => {
-    transmit && socket.emit(EventName.Message, STOP_SOUND);
+    emitMessage(false);
     stopBeep();
-  }, user.speed * 3);
+  }, speed * 3);
   return dash;
 }
 
 export const handleKeyDown = (e) => {
-  const user = getUser();
-  if (!user) return;
-  if (user.keyType === KeyTypes.Paddle) {
+  const { keyType, speed, frequency } = getUser() || {};
+  if (!keyType) return;
+  if (keyType === KeyTypes.Paddle) {
     if (e.key === DOT_KEY && !e.repeat && !i) {
-      i = setInterval(dot(), user.speed * 2);
+      i = setInterval(dot(), speed * 2);
       return;
     } else if (e.key === DASH_KEY && !e.repeat && !i) {
-      i = setInterval(dash(), user.speed * 4);
+      i = setInterval(dash(), speed * 4);
       return;
     }
   } else {
     if (e.key === STRAIGHT_KEY && !e.repeat) {
-      user.transmit && socket.emit(EventName.Message, START_SOUND);
-      startBeep(user.frequency);
+      emitMessage(true);
+      startBeep(frequency);
       return;
     }
   }
