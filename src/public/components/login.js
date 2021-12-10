@@ -1,6 +1,5 @@
 import socket from "../js/socket.js";
-import { setUser } from "../js/userHelpers.js";
-import { User } from "../js/User.js";
+import { createUser } from "../js/userHelpers.js";
 import { EventName } from "../js/types.js";
 
 class Login extends HTMLElement {
@@ -31,7 +30,7 @@ class Login extends HTMLElement {
       const span = document.getElementById("error-message");
       if (!errorMessage) {
         span.innerHTML = "";
-        setUser(new User(name, room));
+        createUser(name, room);
         document.getElementById("user-room").textContent = room;
         document.getElementById("user-name").textContent = name;
       } else {
