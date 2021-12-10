@@ -21,11 +21,14 @@
 - [x] separate logic / components
 - [x] fix bugs / reduce warnings
 - [x] add features (customization, live-time status)
+- [x] make test deploy
 
 > NOTE: decided to go with vanilla JS
 
 # Fri
 
+- [x] separate helpers
+- [x] add jsdoc
 - [ ] separate components
 - [ ] add css
 - [ ] deploy
