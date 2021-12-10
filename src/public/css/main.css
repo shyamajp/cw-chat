@@ -1,5 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;500;600;700;800&display=swap");
+
+/* import */
 @import "./variables.css";
+@import "./layout.css";
+@import "./login.css";
+@import "./chat.css";
 
 *,
 *::before,
@@ -15,19 +20,6 @@ body {
   display: flex;
   flex-direction: column;
   height: 100vh;
-}
-
-main {
-  flex-grow: 1;
-}
-
-#container {
-  min-height: 100%;
-  max-width: 90%;
-  margin: 0 auto;
-}
-
-.form-item {
 }
 
 label {

@@ -1,3 +1,5 @@
+@import "./variables.css";
+
 #chat-page {
   display: flex;
   max-width: 1200px;
@@ -17,6 +19,31 @@
   width: 30%;
 }
 
+/* user */
+#user-list {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 10px;
+  row-gap: 10px;
+  margin-top: 12px;
+}
+
+.user-pill {
+  background-color: var(--text-light);
+  border-radius: 20px;
+  padding: 0px 8px;
+  white-space: nowrap;
+}
+
+.user-pill.transmit {
+  background-color: var(--text-error);
+  color: white;
+  border-radius: 20px;
+  padding: 0px 8px;
+  white-space: nowrap;
+}
+
+/* notification */
 #notification-scroll {
   height: 200px;
   overflow: auto;
@@ -31,4 +58,12 @@
   height: 150px;
   width: 150px;
   user-select: none;
+}
+
+/* settings */
+#settings-form {
+  display: grid;
+  align-items: center;
+  grid-template-columns: repeat(auto-fill, minmax(calc(100% / 2 - 20px), 160px));
+  grid-gap: 20px;
 }
