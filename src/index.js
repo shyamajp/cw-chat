@@ -81,6 +81,8 @@ io.on("connection", (socket) => {
   socket.on("disconnect", () => {
     logger.info(`[${socket.id}] Disconnected`);
     const user = deleteUser(socket.id);
+    // Broadcast: Number of all connected clients
+    io.emit(EventName.UserCount, io.engine.clientsCount);
     if (!user) {
       logger.error(`[${socket.id}] Could not find a user`);
       // Current user: Error
@@ -92,8 +94,6 @@ io.on("connection", (socket) => {
     socket.to(user.room).emit(EventName.Notification, `${user.name} just left the room`);
     // Other users in room: All users in room
     socket.to(user.room).emit(EventName.Users, getUsers(user.room));
-    // Broadcast: Number of all connected clients
-    io.emit(EventName.UserCount, io.engine.clientsCount);
   });
 });
 
