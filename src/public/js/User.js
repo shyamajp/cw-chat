@@ -23,14 +23,14 @@ export class User {
   }
 
   get speed() {
-    return this._speed || DEFAULT_FREQUENCY;
+    return this._speed || DEFAULT_SPEED;
   }
 
   set speed(val) {
     if (val >= MIN_SPEED && val <= MAX_SPEED) {
       this._speed = val;
     } else {
-      this._speed = DEFAULT_FREQUENCY;
+      this._speed = DEFAULT_SPEED;
     }
   }
 
