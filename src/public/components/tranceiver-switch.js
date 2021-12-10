@@ -34,4 +34,4 @@ class Tranceiver extends HTMLElement {
   }
 }
 
-customElements.define("tranceiver-toggle", Tranceiver);
+customElements.define("tranceiver-switch", Tranceiver);
