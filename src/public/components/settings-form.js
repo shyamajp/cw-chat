@@ -41,19 +41,23 @@ class Settings extends HTMLElement {
       <form id="settings-form">
         <div class="form-item">
           <label for="frequency">frequency</label>
+          <br />
           <input type="range" min="440" max="1600" id="frequency" name="frequency" />
         </div>
         <div class="form-item">
           <label for="speed">speed</label>
+          <br />
           <input type="range" min="50" max="200" id="speed" name="speed" />
         </div>
         <div class="form-item">
-          <label for="keyType">straight</label>
-          <input type="radio" value="straight" name="keyType" />
           <label for="keyType">paddle</label>
+          <br />
+          <span>straight</span>
+          <input type="radio" value="straight" name="keyType" />
+          <span>paddle</span>
           <input type="radio" value="paddle" name="keyType" />
         </div>
-        <div class='form-item'>
+        <div class="form-item">
           <button type="submit">update</button>
         </div>
       </form>`;

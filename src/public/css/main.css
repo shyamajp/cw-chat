@@ -27,12 +27,10 @@ main {
 }
 
 label {
-  display: block;
   font-size: 20px;
 }
 
 input {
-  display: block;
   max-width: 100%;
   font-size: 20px;
 }
@@ -47,10 +45,4 @@ button {
 
 .form-item {
   margin-bottom: 12px;
-}
-
-#login-page {
-}
-
-#chat-page {
 }
