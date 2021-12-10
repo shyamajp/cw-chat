@@ -9,3 +9,8 @@ export const EventName = {
   Message: "message",
   Error: "error message",
 };
+
+export const KeyTypes = {
+  Straight: "straight",
+  Paddle: "paddle",
+};

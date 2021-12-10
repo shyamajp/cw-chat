@@ -1,7 +1,8 @@
-export const socket = io();
-import { Beep, getOtherBeep, setOtherBeep } from "./beep.js";
+const socket = io();
+import { getOtherBeep, setOtherBeep } from "./beepHelpers.js";
+import { Beep } from "./Beep.js";
 import { EventName } from "./types.js";
-import { getUser } from "./user.js";
+import { getUser } from "./userHelpers.js";
 
 socket.on(EventName.Notification, (notification) => {
   const ul = document.getElementById("user-notifications");
@@ -48,3 +49,5 @@ socket.on(EventName.Message, (message) => {
     }
   }
 });
+
+export default socket;

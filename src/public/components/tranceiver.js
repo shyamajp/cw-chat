@@ -1,7 +1,7 @@
-import { socket } from "../js/socket.js";
-import { getUser } from "../js/user.js";
+import socket from "../js/socket.js";
+import { getUser } from "../js/userHelpers.js";
 import { EventName } from "../js/types.js";
-import { stopAllOtherBeeps } from "../js/beep.js";
+import { stopAllOtherBeeps } from "../js/beepHelpers.js";
 
 class Tranceiver extends HTMLElement {
   constructor() {

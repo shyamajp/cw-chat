@@ -1,7 +1,8 @@
-import { socket } from "../js/socket.js";
-import { getUser } from "../js/user.js";
+import socket from "../js/socket.js";
+import { getUser } from "../js/userHelpers.js";
 import { EventName } from "../js/types.js";
-import { getMyBeep, setMyBeep, Beep } from "../js/beep.js";
+import { getMyBeep, setMyBeep } from "../js/beepHelpers.js";
+import { Beep } from "../js/Beep.js";
 
 class BeepButton extends HTMLElement {
   constructor() {
@@ -21,19 +22,19 @@ class BeepButton extends HTMLElement {
   }
 
   onStart() {
-    const user = getUser()
+    const user = getUser();
     if (!user) return;
     user.transmit && socket.emit(EventName.Message, "d");
-    const beep = new Beep(user.frequency)
+    const beep = new Beep(user.frequency);
     setMyBeep(beep);
     beep.play();
   }
 
   onStop() {
-    const user = getUser()
+    const user = getUser();
     if (!user) return;
     user.transmit && socket.emit(EventName.Message, "u");
-    getMyBeep().stop()
+    getMyBeep().stop();
   }
 
   render() {

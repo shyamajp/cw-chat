@@ -1,9 +1,4 @@
-let myUser;
-
-export const KeyTypes = {
-  Straight: "straight",
-  Paddle: "paddle",
-};
+import { KeyTypes } from "./types.js";
 
 const DEFAULT_FREQUENCY = 440;
 const DEFAULT_SPEED = 100;
@@ -67,11 +62,3 @@ export class User {
     }
   }
 }
-
-export const getUser = () => {
-  return myUser;
-};
-
-export const setUser = (user) => {
-  myUser = user;
-};

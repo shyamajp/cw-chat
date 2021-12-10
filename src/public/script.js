@@ -1,4 +1,4 @@
-import { handleKeyUp, handleKeyDown } from "./js/keys.js";
+import { handleKeyUp, handleKeyDown } from "./js/keyHelpers.js";
 
 window.onload = () => {
   document.addEventListener("keydown", handleKeyDown);

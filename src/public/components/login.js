@@ -1,5 +1,6 @@
-import { socket } from "../js/socket.js";
-import { setUser, User } from "../js/user.js";
+import socket from "../js/socket.js";
+import { setUser } from "../js/userHelpers.js";
+import { User } from "../js/User.js";
 import { EventName } from "../js/types.js";
 
 class Login extends HTMLElement {

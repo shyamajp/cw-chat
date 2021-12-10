@@ -1,7 +1,8 @@
-import { Beep, getMyBeep, setMyBeep } from "./beep.js";
-import { EventName } from "./types.js";
-import { socket } from "./socket.js";
-import { getUser, KeyTypes } from "./user.js";
+import socket from "./socket.js";
+import { getMyBeep, setMyBeep } from "./beepHelpers.js";
+import { Beep } from "./Beep.js";
+import { EventName, KeyTypes } from "./types.js";
+import { getUser } from "./userHelpers.js";
 
 let i;
 
@@ -69,8 +70,7 @@ export const handleKeyDown = (e) => {
     if (e.key === DOT_KEY && !e.repeat && !i) {
       i = setInterval(dot(), user.speed * 2);
       return;
-    }
-    else if (e.key === DASH_KEY && !e.repeat && !i) {
+    } else if (e.key === DASH_KEY && !e.repeat && !i) {
       i = setInterval(dash(), user.speed * 4);
       return;
     }
