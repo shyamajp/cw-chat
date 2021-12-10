@@ -40,7 +40,7 @@ class BeepButton extends HTMLElement {
 
   render() {
     this.innerHTML = `
-    <button id="beep button">Beep</button>
+    <button id="beep-button">Beep</button>
     `;
   }
 }

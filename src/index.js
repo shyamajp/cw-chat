@@ -30,8 +30,8 @@ io.on("connection", (socket) => {
     logger.info(`[${socket.id}] Joined room "${room}"`);
     socket.join(room);
 
-    // Other users in room: User entering notification
-    socket.to(room).emit(EventName.Notification, `${name} just entered the room`);
+    // All users in room: User entering notification
+    io.in(room).emit(EventName.Notification, `${name} just entered the room`);
     // All users in room: All users in room
     io.in(room).emit(EventName.Users, getUsers(room));
   });
@@ -109,7 +109,7 @@ app.get("/", (req, res, next) => {
 });
 
 app.use((req, res, next) => {
-  res.status(404).sendFile(path.join(__dirname + "/public/404.html"));
+  res.redirect("/");
 });
 
 server.listen(PORT, () => {

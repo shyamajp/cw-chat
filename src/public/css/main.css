@@ -22,16 +22,20 @@ main {
 }
 
 #container {
-  max-width: 80%;
+  min-height: 100%;
+  max-width: 90%;
   margin: 0 auto;
+}
+
+.form-item {
 }
 
 label {
   font-size: 20px;
+  width: 100%;
 }
 
 input {
-  max-width: 100%;
   font-size: 20px;
 }
 
@@ -43,6 +47,11 @@ button {
   border: none;
 }
 
-.form-item {
-  margin-bottom: 12px;
+button:active {
+  background-color: var(--text-error);
+}
+
+hr {
+  margin-top: 24px;
+  margin-bottom: 24px;
 }

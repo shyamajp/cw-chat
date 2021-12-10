@@ -1,6 +1,6 @@
 #settings-form {
   display: grid;
   align-items: center;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(calc(100% / 2 - 20px), 160px));
   grid-gap: 20px;
 }

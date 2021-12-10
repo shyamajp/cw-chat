@@ -2,7 +2,7 @@
 
 header {
   height: 3rem;
-  padding: 2rem;
+  padding: 2.25rem 2rem 1.75rem 2rem;
   background-color: var(--secondary);
   display: flex;
   align-items: center;

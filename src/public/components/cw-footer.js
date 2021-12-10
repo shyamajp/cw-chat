@@ -9,7 +9,7 @@ class Footer extends HTMLElement {
 
   render() {
     this.innerHTML = `
-    <footer>&copy; shyamajp</footer>
+    <footer>CW Chat (v.0.0.1) &copy; shyamajp</footer>
     `;
   }
 }

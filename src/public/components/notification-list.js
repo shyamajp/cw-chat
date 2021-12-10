@@ -8,16 +8,18 @@ class NotificationList extends HTMLElement {
 
   connectedCallback() {
     socket.on(EventName.Notification, (notification) => {
-      this.id = "notification-list";
-      const notificationMessage = document.createElement("li");
-      notificationMessage.innerHTML = notification;
-      this.appendChild(notificationMessage);
-      this.render();
+      const notificationMessageEl = document.createElement("li");
+      notificationMessageEl.innerHTML = notification;
+      this.appendChild(notificationMessageEl);
+
+      const notificationScrollEl = document.getElementById("notification-scroll");
+      notificationScrollEl.scrollTop = notificationScrollEl.scrollHeight;
     });
+    this.render();
   }
 
   render() {
-    this.innerHTML = "";
+    this.innerHTML = `<ul id="notification-list"></ul>`;
   }
 }
 

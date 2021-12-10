@@ -41,27 +41,26 @@ class RoomList extends HTMLElement {
 
   connectedCallback() {
     socket.on(EventName.Rooms, (rooms) => {
+      this.innerHTML = "";
+
       if (!rooms.length) {
+        const emptyMessageEl = document.createElement("span");
+        emptyMessageEl.innerHTML = "Oops! No rooms available. Do you wanna create one?";
+        this.appendChild(emptyMessageEl);
         return;
       }
       this.id = "room-list";
-      this.innerHTML = "";
+
       rooms.slice(0, 10).forEach((room) => {
-        const roomPill = document.createElement("room-pill", { is: RoomPill });
-        roomPill.setAttribute("room", room);
-        this.appendChild(roomPill);
+        const roomPillEl = document.createElement("room-pill", { is: RoomPill });
+        roomPillEl.setAttribute("room", room);
+        this.appendChild(roomPillEl);
       });
     });
-
-    this.render();
   }
 
   disconnectedCallback() {
     this.removeEventListener("change", this.onChange);
-  }
-
-  render() {
-    this.innerHTML = "";
   }
 }
 

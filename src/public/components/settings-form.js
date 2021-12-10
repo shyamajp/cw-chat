@@ -1,9 +1,12 @@
 import { getUser } from "../js/userHelpers.js";
 import { emitSettings } from "../js/socketHelpers.js";
+import { KeyTypes } from "../js/types.js";
+import { DEFAULT_FREQUENCY, DEFAULT_SPEED } from "../js/constants.js";
 
 class Settings extends HTMLElement {
   constructor() {
     super();
+    this.user = getUser();
     this.addEventListener("submit", this.onSubmit);
   }
 
@@ -39,23 +42,29 @@ class Settings extends HTMLElement {
   render() {
     this.innerHTML = `
       <form id="settings-form">
-        <div class="form-item">
-          <label for="frequency">frequency</label>
-          <br />
-          <input type="range" min="440" max="1600" id="frequency" name="frequency" />
+        <div id="user-info">
+          <li>Name: <span id="user-name"></span></li>
+          <li>Frequency: <span id="user-frequency"></span></li>
+          <li>Paddle Speed: <span id="user-speed"></span></li>
+          <li>Key Type: <span id="user-keyType"></span></li>
         </div>
         <div class="form-item">
-          <label for="speed">speed</label>
-          <br />
-          <input type="range" min="50" max="200" id="speed" name="speed" />
-        </div>
-        <div class="form-item">
-          <label for="keyType">paddle</label>
+          <label for="keyType">Key Type</label>
           <br />
           <span>straight</span>
-          <input type="radio" value="straight" name="keyType" />
+          <input type="radio" value="${KeyTypes.Straight}" name="keyType" checked />
           <span>paddle</span>
-          <input type="radio" value="paddle" name="keyType" />
+          <input type="radio" value="${KeyTypes.Paddle}" name="keyType" />
+        </div>
+        <div class="form-item">
+          <label for="frequency">Frequency</label>
+          <br />
+          <input type="range" min="440" max="1600" id="frequency" name="frequency" value="${DEFAULT_FREQUENCY}" />
+        </div>
+        <div class="form-item">
+          <label for="speed">Paddle Speed</label>
+          <br />
+          <input type="range" min="50" max="200" id="speed" name="speed" value="${DEFAULT_SPEED}"/>
         </div>
         <div class="form-item">
           <button type="submit">update</button>

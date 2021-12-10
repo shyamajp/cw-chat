@@ -1,7 +1,7 @@
 @import "./variables.css";
 
 #room-list {
-  display: flex;
+  display: inline-flex;
   flex-flow: row wrap;
   gap: 10px;
   row-gap: 10px;

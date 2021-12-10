@@ -24,11 +24,14 @@ class Login extends HTMLElement {
       const errorMessageEl = document.getElementById("error-message");
       errorMessageEl.innerHTML = errorMessage;
       if (!errorMessage) {
-        createUser(name, room);
+        const user = createUser(name, room);
         document.getElementById("user-room").textContent = room;
         document.getElementById("user-name").textContent = name;
+        document.getElementById("user-frequency").textContent = user.frequency;
+        document.getElementById("user-speed").textContent = user.speed;
+        document.getElementById("user-keyType").textContent = user.keyType;
         document.getElementById("login-page").style.display = "none";
-        document.getElementById("chat-page").style.display = "block";
+        document.getElementById("chat-page").style.display = "flex";
       }
     });
   }
@@ -36,18 +39,25 @@ class Login extends HTMLElement {
   render() {
     this.innerHTML = `
     <form id="login-form">
-      <div class='form-item'>
+      <div class="form-item">
+        <label for="name">name</label>
+        <br />
+        <input id="name" name="name" />
+      </div>
+      <div class="form-item">
         <label for="room">room</label>
+        <br />
         <input id="room" name="room" />
+      </div>
+      <div class="form-item">
+        <h4>Rooms</h4>
         <room-list></room-list>
       </div>
-      <div class='form-item'>
-        <label for="name">name</label>
-        <input id="name" name="name" />
-        <span id='error-message'></span>
+      <div class="form-item">
+        <span id="error-message"></span>
       </div>
-      <div class='form-item'>
-        <button type="submit">login</button>
+      <div class="form-item">
+        <button type="submit" id="login-button">login</button>
       </div>
     </form>`;
   }

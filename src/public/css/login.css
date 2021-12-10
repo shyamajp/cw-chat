@@ -1,8 +1,16 @@
 @import "./variables.css";
 
 #login-page {
+  width: 100%;
   max-width: 600px;
   margin: 0 auto;
+  text-align: center;
+}
+
+#login-form {
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
 }
 
 #login-form #error-message {
