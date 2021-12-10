@@ -8,6 +8,9 @@ const addUser = (id, name, room) => {
   if (!name) return { error: "Username is required" };
   if (!room) return { error: "Room is required" };
 
+  if (name.length > 12) return { error: "Name cannot be longer than 12 characters" };
+  if (room.length > 18) return { error: "Room cannot be longer than 18 characters" };
+
   const user = { id, name, room };
   users.push(user);
   return { user };
