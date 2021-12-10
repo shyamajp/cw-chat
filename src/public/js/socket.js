@@ -6,8 +6,9 @@ import { getUser } from "./userHelpers.js";
 
 socket.on(EventName.Message, (message) => {
   const { id, text, frequency } = message;
+  const { transmit } = getUser() || {};
 
-  if (!getUser().transmit) {
+  if (!transmit) {
     if (text === START_SOUND) {
       startBeep(frequency, id);
     } else if (text === STOP_SOUND) {

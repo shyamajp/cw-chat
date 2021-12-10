@@ -1,6 +1,37 @@
-import socket from "../../js/socket.js";
-import { EventName } from "../../js/types.js";
-import { RoomPill } from "./room-pill.js";
+import socket from "../js/socket.js";
+import { EventName } from "../js/types.js";
+
+class RoomPill extends HTMLElement {
+  constructor() {
+    super();
+    this.addEventListener("click", this.onClick);
+    this.room = "";
+  }
+
+  connectedCallback() {
+    this.room = this.getAttribute("room");
+
+    this.render();
+  }
+
+  disconnectedCallback() {
+    this.removeEventListener("change", this.onChange);
+  }
+
+  onClick() {
+    document.getElementById("room").value = this.room;
+  }
+
+  render() {
+    this.innerHTML = `
+    <a class="room-pill">
+      <span>${this.room}</span>
+    </a>
+    `;
+  }
+}
+
+customElements.define("room-pill", RoomPill);
 
 class RoomList extends HTMLElement {
   constructor() {

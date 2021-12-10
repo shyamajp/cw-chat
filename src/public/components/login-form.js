@@ -17,20 +17,18 @@ class Login extends HTMLElement {
 
   onSubmit(e) {
     e.preventDefault();
-    const room = e.target.room?.value;
-    const name = e.target.name?.value;
+    const room = e.target.room.value;
+    const name = e.target.name.value;
     emitLogin(room, name);
     receiveError().then((errorMessage) => {
-      const span = document.getElementById("error-message");
+      const errorMessageEl = document.getElementById("error-message");
+      errorMessageEl.innerHTML = errorMessage;
       if (!errorMessage) {
-        span.innerHTML = "";
         createUser(name, room);
         document.getElementById("user-room").textContent = room;
         document.getElementById("user-name").textContent = name;
         document.getElementById("login-page").style.display = "none";
         document.getElementById("chat-page").style.display = "block";
-      } else {
-        span.innerHTML = errorMessage;
       }
     });
   }

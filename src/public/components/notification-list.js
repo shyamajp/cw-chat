@@ -12,9 +12,8 @@ class NotificationList extends HTMLElement {
       const notificationMessage = document.createElement("li");
       notificationMessage.innerHTML = notification;
       this.appendChild(notificationMessage);
+      this.render();
     });
-
-    this.render();
   }
 
   render() {

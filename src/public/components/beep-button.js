@@ -6,9 +6,10 @@ class BeepButton extends HTMLElement {
   constructor() {
     super();
     this.addEventListener("mousedown", this.onStart);
-    this.addEventListener("touchstart", this.onStart);
     this.addEventListener("mouseup", this.onStop);
-    this.addEventListener("touchend", this.onStop);
+
+    this.addEventListener("touchstart", this.onStart, { passive: true });
+    this.addEventListener("touchend", this.onStop, { passive: true });
   }
 
   connectedCallback() {
@@ -16,7 +17,11 @@ class BeepButton extends HTMLElement {
   }
 
   disconnectedCallback() {
-    this.removeEventListener("change", this.onChange);
+    this.addEventListener("mousedown", this.onStart);
+    this.addEventListener("mouseup", this.onStop);
+
+    this.addEventListener("touchstart", this.onStart, { passive: true });
+    this.addEventListener("touchend", this.onStop, { passive: true });
   }
 
   onStart() {
@@ -35,7 +40,7 @@ class BeepButton extends HTMLElement {
 
   render() {
     this.innerHTML = `
-    <button>Beep</button>
+    <button id="beep button">Beep</button>
     `;
   }
 }
