@@ -10,6 +10,7 @@ const { logger } = require("./logger");
 
 const PORT = process.env.PORT || 3000;
 
+/* WEBSOCKET */
 io.on("connection", (socket) => {
   logger.info(`[${socket.id}] connected`);
   // All: Number of all connected clients
@@ -99,8 +100,6 @@ io.on("connection", (socket) => {
 app.use(express.static(__dirname + "/public"));
 
 /* ROUTES */
-
-// home
 app.get("/", (req, res, next) => {
   try {
     res.sendFile(path.join(__dirname + "/public/index.html"));
@@ -109,7 +108,6 @@ app.get("/", (req, res, next) => {
   }
 });
 
-// 404
 app.use((req, res, next) => {
   res.status(404).sendFile(path.join(__dirname + "/public/404.html"));
 });

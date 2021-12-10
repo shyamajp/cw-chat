@@ -1,4 +1,5 @@
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
 export class Beep {
   constructor(frequency = 400) {
     this._frequency = frequency;
