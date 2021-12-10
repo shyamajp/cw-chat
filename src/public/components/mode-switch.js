@@ -2,7 +2,7 @@ import { getUser } from "../js/helpers/userHelpers.js";
 import { stopAllBeeps } from "../js/helpers/beepHelpers.js";
 import { emitMessage, emitMode } from "../js/helpers/socketHelpers.js";
 
-class Tranceiver extends HTMLElement {
+class ModeSwitch extends HTMLElement {
   constructor() {
     super();
     this.addEventListener("change", this.onChange);
@@ -28,10 +28,13 @@ class Tranceiver extends HTMLElement {
   }
 
   render() {
+    // this.innerHTML = `
+    // <input type="checkbox" name="transmit" id="transmit" />
+    // `;
     this.innerHTML = `
     <input type="checkbox" name="transmit" id="transmit" />
     `;
   }
 }
 
-customElements.define("tranceiver-switch", Tranceiver);
+customElements.define("mode-switch", ModeSwitch);

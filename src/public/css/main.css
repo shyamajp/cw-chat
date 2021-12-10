@@ -22,6 +22,51 @@ body {
   height: 100vh;
 }
 
+/* header */
+header {
+  height: 3rem;
+  padding: 2.25rem 2rem 1.75rem 2rem;
+  background-color: var(--secondary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
+
+header #page-title {
+  color: white;
+  font-size: 30px;
+  font-weight: 200;
+  text-decoration: none;
+  font-style: italic;
+}
+
+header #user-count {
+  font-size: 20px;
+}
+
+/* main */
+main {
+  flex-grow: 1;
+}
+
+#container {
+  min-height: 100%;
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+/* footer */
+footer {
+  height: 3rem;
+  line-height: 3rem;
+  text-align: center;
+  font-weight: 300;
+}
+
+/* override */
 label {
   font-size: 20px;
   width: 100%;
