@@ -10,6 +10,9 @@ class RoomList extends HTMLElement {
 
   connectedCallback() {
     socket.on(EventName.Rooms, (rooms) => {
+      if (!rooms.length) {
+        return;
+      }
       this.id = "room-list";
       this.innerHTML = "";
       rooms.slice(0, 10).forEach((room) => {
@@ -27,10 +30,7 @@ class RoomList extends HTMLElement {
   }
 
   render() {
-    this.innerHTML = `
-    <div>
-    </div>
-    `;
+    this.innerHTML = ``;
   }
 }
 
