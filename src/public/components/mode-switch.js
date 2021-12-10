@@ -28,11 +28,12 @@ class ModeSwitch extends HTMLElement {
   }
 
   render() {
-    // this.innerHTML = `
-    // <input type="checkbox" name="transmit" id="transmit" />
-    // `;
     this.innerHTML = `
-    <input type="checkbox" name="transmit" id="transmit" />
+    <div id="mode-switch">
+      <input type="checkbox" name="transmit" id="transmit" />
+      <label for="transmit"></label>
+    </div>
+
     `;
   }
 }

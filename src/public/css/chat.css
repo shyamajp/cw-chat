@@ -43,6 +43,12 @@
   white-space: nowrap;
 }
 
+/* instructions */
+#instructions p {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
 /* notification */
 #notification-scroll {
   height: 200px;
@@ -53,6 +59,38 @@
   display: none;
 }
 
+/* mode switch */
+#mode-switch > input {
+  width: 0;
+  height: 0;
+  visibility: hidden;
+}
+
+#mode-switch > label {
+  display: block;
+  width: 150px;
+  height: 30px;
+  background-color: var(--secondary);
+  border-radius: 100px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+#mode-switch > label::after {
+  content: "RECEIVE";
+  display: block;
+  text-align: center;
+}
+
+#mode-switch > input:checked + label:after {
+  content: "TRANSMIT";
+}
+
+#mode-switch > input:checked + label {
+  background-color: var(--text-error);
+}
+
+/* beep button */
 #beep-button {
   font-size: 40px;
   height: 150px;

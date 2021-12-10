@@ -82,6 +82,7 @@ button {
   border-radius: 20px;
   background-color: var(--ternary);
   border: none;
+  text-transform: uppercase;
 }
 
 button:active {
@@ -91,4 +92,12 @@ button:active {
 hr {
   margin-top: 24px;
   margin-bottom: 24px;
+}
+
+h1,
+h2,
+h3,
+h4,
+ul {
+  margin-bottom: 4px;
 }
