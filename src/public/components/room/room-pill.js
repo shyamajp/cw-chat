@@ -1,8 +1,8 @@
 export class RoomPill extends HTMLElement {
-  constructor(room = "") {
+  constructor() {
     super();
     this.addEventListener("click", this.onClick);
-    this.room = room;
+    this.room = "";
   }
 
   connectedCallback() {

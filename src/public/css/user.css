@@ -1,0 +1,24 @@
+@import "./variables.css";
+
+#user-list {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 10px;
+  row-gap: 10px;
+  margin-top: 12px;
+}
+
+.user-pill {
+  background-color: var(--text-light);
+  border-radius: 20px;
+  padding: 0px 8px;
+  white-space: nowrap;
+}
+
+.user-pill.transmit {
+  background-color: var(--text-error);
+  color: white;
+  border-radius: 20px;
+  padding: 0px 8px;
+  white-space: nowrap;
+}

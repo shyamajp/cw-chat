@@ -30,7 +30,7 @@ class RoomList extends HTMLElement {
   }
 
   render() {
-    this.innerHTML = ``;
+    this.innerHTML = "";
   }
 }
 
