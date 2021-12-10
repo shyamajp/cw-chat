@@ -1,9 +1,5 @@
 import { KeyTypes } from "./types.js";
-
-const DEFAULT_FREQUENCY = 440;
-const DEFAULT_SPEED = 100;
-const DEFAULT_KEY_TYPE = KeyTypes.Straight;
-
+import { DEFAULT_FREQUENCY, DEFAULT_SPEED, DEFAULT_KEY_TYPE } from "./constants.js";
 export class User {
   constructor(name, room, frequency = DEFAULT_FREQUENCY, speed = DEFAULT_SPEED) {
     this._name = name;

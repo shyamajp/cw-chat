@@ -2,15 +2,13 @@ import socket from "./socket.js";
 import { startBeep, stopBeep } from "./beepHelpers.js";
 import { EventName, KeyTypes } from "./types.js";
 import { getUser } from "./userHelpers.js";
+import { START_SOUND, STOP_SOUND } from "./constants.js";
 
 let i;
 
 let STRAIGHT_KEY = " ";
 let DOT_KEY = "k";
 let DASH_KEY = "l";
-
-const START_SOUND = "d";
-const STOP_SOUND = "u";
 
 /* NOTE: DOT:DASH:PAUSE = 1:3:1 */
 
