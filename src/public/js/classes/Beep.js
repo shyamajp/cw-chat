@@ -1,4 +1,4 @@
-import { DEFAULT_FREQUENCY } from "./constants.js";
+import { DEFAULT_FREQUENCY } from "../constants.js";
 
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 

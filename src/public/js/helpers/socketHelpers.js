@@ -1,6 +1,6 @@
-import socket from "./socket.js";
-import { START_SOUND, STOP_SOUND } from "./constants.js";
-import { EventName, ModeTypes } from "./types.js";
+import socket from "../socket.js";
+import { START_SOUND, STOP_SOUND } from "../constants.js";
+import { EventName, ModeTypes } from "../types.js";
 import { getUser } from "./userHelpers.js";
 
 /**

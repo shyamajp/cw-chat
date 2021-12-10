@@ -1,4 +1,4 @@
-import { KeyTypes } from "./types.js";
+import { KeyTypes } from "../types.js";
 import { startBeep, stopBeep } from "./beepHelpers.js";
 import { getUser } from "./userHelpers.js";
 import { emitMessage } from "./socketHelpers.js";

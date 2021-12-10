@@ -1,7 +1,7 @@
-import { getUser } from "../js/userHelpers.js";
-import { emitSettings } from "../js/socketHelpers.js";
-import { KeyTypes } from "../js/types.js";
 import { DEFAULT_FREQUENCY, DEFAULT_SPEED } from "../js/constants.js";
+import { KeyTypes } from "../js/types.js";
+import { getUser } from "../js/helpers/userHelpers.js";
+import { emitSettings } from "../js/helpers/socketHelpers.js";
 
 class Settings extends HTMLElement {
   constructor() {

@@ -1,6 +1,6 @@
-import { getUser } from "../js/userHelpers.js";
-import { stopBeep, startBeep } from "../js/beepHelpers.js";
-import { emitMessage } from "../js/socketHelpers.js";
+import { getUser } from "../js/helpers/userHelpers.js";
+import { stopBeep, startBeep } from "../js/helpers/beepHelpers.js";
+import { emitMessage } from "../js/helpers/socketHelpers.js";
 
 class BeepButton extends HTMLElement {
   constructor() {

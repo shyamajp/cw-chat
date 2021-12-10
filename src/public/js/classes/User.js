@@ -1,5 +1,5 @@
-import { KeyTypes } from "./types.js";
-import { DEFAULT_FREQUENCY, DEFAULT_SPEED, DEFAULT_KEY_TYPE, MIN_FREQUENCY, MAX_FREQUENCY, MIN_SPEED, MAX_SPEED } from "./constants.js";
+import { KeyTypes } from "../types.js";
+import { DEFAULT_FREQUENCY, DEFAULT_SPEED, DEFAULT_KEY_TYPE, MIN_FREQUENCY, MAX_FREQUENCY, MIN_SPEED, MAX_SPEED } from "../constants.js";
 
 export class User {
   constructor(name, room, frequency = DEFAULT_FREQUENCY, speed = DEFAULT_SPEED) {

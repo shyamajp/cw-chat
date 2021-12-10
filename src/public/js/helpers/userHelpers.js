@@ -1,4 +1,4 @@
-import { User } from "./User.js";
+import { User } from "../classes/User.js";
 
 let myUser;
 

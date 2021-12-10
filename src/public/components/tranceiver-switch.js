@@ -1,6 +1,6 @@
-import { getUser } from "../js/userHelpers.js";
-import { stopAllBeeps } from "../js/beepHelpers.js";
-import { emitMessage, emitMode } from "../js/socketHelpers.js";
+import { getUser } from "../js/helpers/userHelpers.js";
+import { stopAllBeeps } from "../js/helpers/beepHelpers.js";
+import { emitMessage, emitMode } from "../js/helpers/socketHelpers.js";
 
 class Tranceiver extends HTMLElement {
   constructor() {

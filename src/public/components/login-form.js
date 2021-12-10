@@ -1,5 +1,5 @@
-import { emitLogin, receiveError } from "../js/socketHelpers.js";
-import { createUser } from "../js/userHelpers.js";
+import { emitLogin, receiveError } from "../js/helpers/socketHelpers.js";
+import { createUser } from "../js/helpers/userHelpers.js";
 
 class Login extends HTMLElement {
   constructor() {

@@ -1,8 +1,9 @@
 const socket = io();
-import { stopBeep, startBeep } from "./beepHelpers.js";
+
 import { START_SOUND, STOP_SOUND } from "./constants.js";
 import { EventName } from "./types.js";
-import { getUser } from "./userHelpers.js";
+import { stopBeep, startBeep } from "./helpers/beepHelpers.js";
+import { getUser } from "./helpers/userHelpers.js";
 
 socket.on(EventName.Message, (message) => {
   const { id, text, frequency } = message;

@@ -1,4 +1,4 @@
-import { Beep } from "./Beep.js";
+import { Beep } from "../classes/Beep.js";
 
 let myBeep;
 let otherBeeps = {};
