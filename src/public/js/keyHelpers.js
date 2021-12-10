@@ -1,6 +1,5 @@
 import socket from "./socket.js";
-import { getMyBeep, setMyBeep } from "./beepHelpers.js";
-import { Beep } from "./Beep.js";
+import { startBeep, stopBeep } from "./beepHelpers.js";
 import { EventName, KeyTypes } from "./types.js";
 import { getUser } from "./userHelpers.js";
 
@@ -16,18 +15,17 @@ const STOP_SOUND = "u";
 /* NOTE: DOT:DASH:PAUSE = 1:3:1 */
 
 export const handleKeyUp = (e) => {
-  const beep = getMyBeep();
   const keyType = getUser()?.keyType;
   if (!getUser()) return;
   if (keyType === KeyTypes.Paddle) {
     if (e.key === DOT_KEY || e.key === DASH_KEY) {
-      beep.stop();
+      stopBeep();
       clearInterval(i);
       i = undefined;
     }
   } else {
     if (keyType === KeyTypes.Straight && e.key === STRAIGHT_KEY) {
-      beep.stop();
+      stopBeep();
       transmit && socket.emit(EventName.Message, STOP_SOUND);
     }
   }
@@ -38,12 +36,10 @@ function dot() {
   if (!user) return;
   const transmit = user.transmit;
   transmit && socket.emit(EventName.Message, START_SOUND);
-  const beep = new Beep(user.frequency);
-  setMyBeep(beep);
-  beep.play();
+  startBeep(user.frequency);
   setTimeout(() => {
     transmit && socket.emit(EventName.Message, STOP_SOUND);
-    beep.stop();
+    stopBeep();
   }, user.speed);
   return dot;
 }
@@ -53,12 +49,10 @@ function dash() {
   if (!user) return;
   const transmit = user.transmit;
   transmit && socket.emit(EventName.Message, START_SOUND);
-  const beep = new Beep(user.frequency);
-  setMyBeep(beep);
-  beep.play();
+  startBeep(user.frequency);
   setTimeout(() => {
     transmit && socket.emit(EventName.Message, STOP_SOUND);
-    beep.stop();
+    stopBeep();
   }, user.speed * 3);
   return dash;
 }
@@ -77,8 +71,7 @@ export const handleKeyDown = (e) => {
   } else {
     if (e.key === STRAIGHT_KEY && !e.repeat) {
       user.transmit && socket.emit(EventName.Message, START_SOUND);
-      setMyBeep(new Beep(user.frequency));
-      getMyBeep().play();
+      startBeep(user.frequency);
       return;
     }
   }

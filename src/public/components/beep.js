@@ -1,8 +1,7 @@
 import socket from "../js/socket.js";
 import { getUser } from "../js/userHelpers.js";
 import { EventName } from "../js/types.js";
-import { getMyBeep, setMyBeep } from "../js/beepHelpers.js";
-import { Beep } from "../js/Beep.js";
+import { stopBeep, startBeep } from "../js/beepHelpers.js";
 
 class BeepButton extends HTMLElement {
   constructor() {
@@ -25,16 +24,14 @@ class BeepButton extends HTMLElement {
     const user = getUser();
     if (!user) return;
     user.transmit && socket.emit(EventName.Message, "d");
-    const beep = new Beep(user.frequency);
-    setMyBeep(beep);
-    beep.play();
+    startBeep(user.frequency);
   }
 
   onStop() {
     const user = getUser();
     if (!user) return;
     user.transmit && socket.emit(EventName.Message, "u");
-    getMyBeep().stop();
+    stopBeep();
   }
 
   render() {

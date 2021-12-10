@@ -1,6 +1,5 @@
 const socket = io();
-import { getOtherBeep, setOtherBeep } from "./beepHelpers.js";
-import { Beep } from "./Beep.js";
+import { stopBeep, startBeep } from "./beepHelpers.js";
 import { EventName } from "./types.js";
 import { getUser } from "./userHelpers.js";
 
@@ -37,15 +36,13 @@ socket.on(EventName.UserCount, (userCount) => {
 });
 
 socket.on(EventName.Message, (message) => {
-  const { id, text, frequency: othersFrequency } = message;
+  const { id, text, frequency } = message;
 
   if (!getUser().transmit) {
     if (text === "d") {
-      const beep = new Beep(othersFrequency);
-      setOtherBeep(id, beep);
-      beep.play();
+      startBeep(frequency, id);
     } else if (text === "u") {
-      getOtherBeep(id)?.stop();
+      stopBeep(id);
     }
   }
 });

@@ -1,41 +1,28 @@
-import { EventName } from "./types.js";
+import { Beep } from "./Beep.js";
 
 let myBeep;
 let otherBeeps = {};
 
-export const getMyBeep = () => {
-  return myBeep;
+export const startBeep = (frequency, id) => {
+  if (id) {
+    otherBeeps[id] = new Beep(frequency);
+    otherBeeps[id].start();
+  } else {
+    myBeep = new Beep(frequency);
+    myBeep.start();
+  }
 };
 
-export const setMyBeep = (beep) => {
-  myBeep = beep;
+export const stopBeep = (id) => {
+  if (id) {
+    otherBeeps[id]?.stop();
+  } else {
+    myBeep?.stop();
+  }
 };
 
-export const getOtherBeep = (id) => {
-  return otherBeeps[id];
-};
-
-export const setOtherBeep = (id, beep) => {
-  otherBeeps[id] = beep;
-};
-
-export const stopAllOtherBeeps = () => {
+export const stopAllBeeps = () => {
   Object.values(otherBeeps).forEach((beep) => {
     beep.stop();
   });
-};
-
-export const startBeep = (beep, socket, transmit = true) => {
-  if (transmit) {
-    socket.emit(EventName.Message, "d");
-  }
-  setMyBeep(beep);
-  beep.play();
-};
-
-export const stopBeep = (beep, socket, transmit = true) => {
-  if (transmit) {
-    socket.emit(EventName.Message, "u");
-  }
-  beep.stop();
 };

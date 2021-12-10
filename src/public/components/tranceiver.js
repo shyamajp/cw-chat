@@ -1,7 +1,7 @@
 import socket from "../js/socket.js";
 import { getUser } from "../js/userHelpers.js";
 import { EventName } from "../js/types.js";
-import { stopAllOtherBeeps } from "../js/beepHelpers.js";
+import { stopAllBeeps } from "../js/beepHelpers.js";
 
 class Tranceiver extends HTMLElement {
   constructor() {
@@ -21,7 +21,7 @@ class Tranceiver extends HTMLElement {
     const transmit = e.composedPath()[0].checked;
     const mode = transmit ? "transmit" : "receive";
     if (transmit) {
-      stopAllOtherBeeps();
+      stopAllBeeps();
     }
     socket.emit(EventName.Mode, mode);
     getUser().transmit = transmit;
