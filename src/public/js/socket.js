@@ -21,16 +21,6 @@ socket.on(EventName.Users, (users) => {
   });
 });
 
-socket.on(EventName.Rooms, (rooms) => {
-  const ul = document.getElementById("room-list");
-  ul.innerHTML = "";
-  rooms.forEach((room) => {
-    const li = document.createElement("li");
-    li.appendChild(document.createTextNode(room));
-    ul.appendChild(li);
-  });
-});
-
 socket.on(EventName.UserCount, (userCount) => {
   const span = document.getElementById("user-count");
   span.innerHTML = userCount;

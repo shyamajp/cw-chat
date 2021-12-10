@@ -41,6 +41,7 @@ class Login extends HTMLElement {
       <div class='form-item'>
         <label for="room">room</label>
         <input id="room" name="room" />
+        <room-list></room-list>
       </div>
       <div class='form-item'>
         <label for="name">name</label>
