@@ -10,29 +10,45 @@
 body {
   margin: 0;
   background-color: var(--background-white);
-  font-family: "Roboto", sans-serif;
-  color: var(--text-gray-strong);
+  font-family: "Baloo Bhaijaan 2", sans-serif;
+  color: var(--text-dark);
   display: flex;
   flex-direction: column;
   height: 100vh;
 }
 
-header {
-  height: 3rem;
-  padding: 2rem;
-  background-color: grey;
-}
-
 main {
-  padding: 2rem 1rem;
-  width: 80%;
-  margin: 0 auto;
   flex-grow: 1;
 }
 
-footer {
-  height: 3rem;
-  line-height: 3rem;
-  text-align: center;
-  font-weight: 300;
+#container {
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+label {
+  display: block;
+  font-size: 20px;
+}
+
+input {
+  display: block;
+  max-width: 100%;
+  font-size: 20px;
+}
+
+button {
+  font-size: 20px;
+  padding: 8px 16px;
+  border-radius: 20px;
+  background-color: var(--ternary);
+  border: none;
+}
+
+.form-item {
+  margin-bottom: 12px;
+}
+
+#chat-page {
+  display: none;
 }

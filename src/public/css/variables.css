@@ -1,8 +1,9 @@
 :root {
-  --primary: rgba(100, 98, 180);
-  --secondary: rgba(83, 191, 217);
+  --primary: #242038;
+  --secondary: #80ada0;
+  --ternary: #f2d1c9;
   --background-white: white;
-  --text-gray-strong: #333;
-  --text-gray-normal: #555;
-  --text-gray-weak: #777;
+  --text-dark: #302d2d;
+  --text-light: #f9e7e7;
+  --text-error: #ff7e6b;
 }

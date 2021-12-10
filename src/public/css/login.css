@@ -1,0 +1,10 @@
+@import "./variables.css";
+
+#login-page {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+#login-form #error-message {
+  color: var(--text-error);
+}

@@ -1,61 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/login.css" />
+    <link rel="stylesheet" href="css/header.css" />
+    <link rel="stylesheet" href="css/footer.css" />
+    <title>CW Chat</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="css/main.css" />
-  <link rel="stylesheet" href="css/styles.css" />
-  <title>CW Chat</title>
-</head>
-
-<body>
-  <header>CW Chat</header>
-  <main>
-    <h2>Login</h2>
-    <login-form></login-form>
-    <hr />
-    <h2>Info</h2>
-    <ul>
-      <li>User count: <span id="user-count"></span></li>
-      <li>Room: <span id="user-room"></span></li>
-      <li>Name: <span id="user-name"></span></li>
-      <li>Frequency: <span id="user-frequency"></span></li>
-      <li>Speed: <span id="user-speed"></span></li>
-      <li>Key Type: <span id="user-keyType"></span></li>
-      <li>
-        Users:
-        <ul id="user-list"></ul>
-      </li>
-      <li>
-        Rooms:
-        <ul id="room-list"></ul>
-      </li>
-    </ul>
-    <hr />
-    <h2>Notifications</h2>
-    <ul id="user-notifications">
-      <li>user-a left</li>
-      <li>user-a left</li>
-      <li>user-a left</li>
-      <li>user-a left</li>
-    </ul>
-    <hr />
-    <h2>Settings</h2>
-    <settings-form></settings-form>
-    <hr />
-    <h2>CQ</h2>
-    <beep-button></beep-button>
-    <tranceiver-toggle></tranceiver-toggle>
-  </main>
-  <footer>&copy; shyamajp</footer>
-  <script src="/socket.io/socket.io.js"></script>
-  <script type="module" src="script.js"></script>
-  <script type="module" src="components/login.js"></script>
-  <script type="module" src="components/tranceiver.js"></script>
-  <script type="module" src="components/settings.js"></script>
-  <script type="module" src="components/beep.js"></script>
-</body>
-
+  <body>
+    <main>
+      <cw-header></cw-header>
+      <div id="container">
+        <div class="page" id="login-page">
+          <h1>Login</h1>
+          <login-form></login-form>
+          <hr />
+          <p>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Atque ipsa, voluptates corrupti explicabo perspiciatis nihil pariatur expedita molestias consequatur porro dolores eligendi! Nisi
+            tempore voluptatibus odit corrupti error quibusdam dignissimos!
+            <br />
+            <br />
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Atque ipsa, voluptates corrupti explicabo perspiciatis nihil pariatur expedita molestias consequatur porro dolores eligendi! Nisi
+            tempore voluptatibus odit corrupti error quibusdam dignissimos!
+          </p>
+        </div>
+        <div class="page" id="chat-page">
+          <h2>Info</h2>
+          <ul>
+            <li>Room: <span id="user-room"></span></li>
+            <li>Name: <span id="user-name"></span></li>
+            <li>Frequency: <span id="user-frequency"></span></li>
+            <li>Speed: <span id="user-speed"></span></li>
+            <li>Key Type: <span id="user-keyType"></span></li>
+            <li>
+              Users:
+              <ul id="user-list"></ul>
+            </li>
+            <li>
+              Rooms:
+              <ul id="room-list"></ul>
+            </li>
+          </ul>
+          <hr />
+          <h2>Notifications</h2>
+          <ul id="user-notifications">
+            <li>user-a left</li>
+            <li>user-a left</li>
+            <li>user-a left</li>
+            <li>user-a left</li>
+          </ul>
+          <hr />
+          <h2>Settings</h2>
+          <settings-form></settings-form>
+          <hr />
+          <h2>CQ</h2>
+          <beep-button></beep-button>
+          <tranceiver-toggle></tranceiver-toggle>
+        </div>
+      </div>
+    </main>
+    <cw-footer></cw-footer>
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="module" src="script.js"></script>
+    <script type="module" src="components/login.js"></script>
+    <script type="module" src="components/tranceiver.js"></script>
+    <script type="module" src="components/settings.js"></script>
+    <script type="module" src="components/beep.js"></script>
+    <script type="module" src="components/cw-header.js"></script>
+    <script type="module" src="components/cw-footer.js"></script>
+  </body>
 </html>

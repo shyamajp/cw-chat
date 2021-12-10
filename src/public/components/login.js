@@ -27,6 +27,8 @@ class Login extends HTMLElement {
         createUser(name, room);
         document.getElementById("user-room").textContent = room;
         document.getElementById("user-name").textContent = name;
+        document.getElementById("login-page").style.display = "none";
+        document.getElementById("chat-page").style.display = "block";
       } else {
         span.innerHTML = errorMessage;
       }
