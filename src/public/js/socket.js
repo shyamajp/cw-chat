@@ -4,13 +4,6 @@ import { START_SOUND, STOP_SOUND } from "./constants.js";
 import { EventName } from "./types.js";
 import { getUser } from "./userHelpers.js";
 
-socket.on(EventName.Notification, (notification) => {
-  const ul = document.getElementById("user-notifications");
-  const li = document.createElement("li");
-  li.appendChild(document.createTextNode(notification));
-  ul.appendChild(li);
-});
-
 socket.on(EventName.Message, (message) => {
   const { id, text, frequency } = message;
 

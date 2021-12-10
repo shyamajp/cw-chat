@@ -9,7 +9,6 @@ class Header extends HTMLElement {
 
   connectedCallback() {
     socket.on(EventName.UserCount, (userCount) => {
-      console.log(userCount);
       this.userCount = userCount;
       this.render();
     });
