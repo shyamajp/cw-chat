@@ -1,6 +1,6 @@
 const socket = io();
 import { stopBeep, startBeep } from "./beepHelpers.js";
-import { START_SOUND, STOP_SOUND } from "./constants.js";
+import { START_SOUND, STOP_SOUND, DEFAULT_FREQUENCY, DEFAULT_MODE } from "./constants.js";
 import { EventName } from "./types.js";
 import { getUser } from "./userHelpers.js";
 
@@ -16,7 +16,7 @@ socket.on(EventName.Users, (users) => {
   ul.innerHTML = "";
   users.forEach(({ name, mode, frequency }) => {
     const li = document.createElement("li");
-    li.appendChild(document.createTextNode(`${name} (${mode || "receive"}) (${frequency || "440"})`));
+    li.appendChild(document.createTextNode(`${name} (${mode || DEFAULT_MODE}) (${frequency || DEFAULT_FREQUENCY})`));
     ul.appendChild(li);
   });
 });

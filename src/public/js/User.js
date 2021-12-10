@@ -1,5 +1,5 @@
 import { KeyTypes } from "./types.js";
-import { DEFAULT_FREQUENCY, DEFAULT_SPEED, DEFAULT_KEY_TYPE } from "./constants.js";
+import { DEFAULT_FREQUENCY, DEFAULT_SPEED, DEFAULT_KEY_TYPE, MIN_FREQUENCY, MAX_FREQUENCY, MIN_SPEED, MAX_SPEED } from "./constants.js";
 export class User {
   constructor(name, room, frequency = DEFAULT_FREQUENCY, speed = DEFAULT_SPEED) {
     this._name = name;
@@ -15,7 +15,7 @@ export class User {
   }
 
   set frequency(val) {
-    if (val >= 440 && val <= 1600) {
+    if (val >= MIN_FREQUENCY && val <= MAX_FREQUENCY) {
       this._frequency = val;
     } else {
       this._frequency = DEFAULT_FREQUENCY;
@@ -27,7 +27,7 @@ export class User {
   }
 
   set speed(val) {
-    if (val >= 50 && val <= 200) {
+    if (val >= MIN_SPEED && val <= MAX_SPEED) {
       this._speed = val;
     } else {
       this._speed = DEFAULT_FREQUENCY;
