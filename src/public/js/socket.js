@@ -11,11 +11,6 @@ socket.on(EventName.Notification, (notification) => {
   ul.appendChild(li);
 });
 
-socket.on(EventName.UserCount, (userCount) => {
-  const span = document.getElementById("user-count");
-  span.innerHTML = userCount;
-});
-
 socket.on(EventName.Message, (message) => {
   const { id, text, frequency } = message;
 

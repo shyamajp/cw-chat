@@ -1,4 +1,4 @@
-import { DEFAULT_MODE } from "../../js/constants";
+import { DEFAULT_MODE } from "../../js/constants.js";
 
 export class UserPill extends HTMLElement {
   constructor() {
