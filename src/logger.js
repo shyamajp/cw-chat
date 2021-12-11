@@ -1,6 +1,7 @@
 const log4js = require("log4js");
 
 log4js.configure({
+  pm2: true,
   appenders: {
     stdout: { type: "stdout" },
     all_file: { type: "file", filename: "logs/all-logs.log" },
