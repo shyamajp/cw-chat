@@ -19,6 +19,12 @@
   width: 30%;
 }
 
+/* room */
+#user-room {
+  font-size: 2em;
+  margin-top: 0.67em;
+}
+
 /* user */
 #user-list {
   display: flex;
