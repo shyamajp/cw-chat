@@ -4,6 +4,7 @@
 
 ### Fixed
 
+- Disable scrolling down on pressing space
 - Update input validation to avoid script injection
 
 ## [0.0.2] - 2021-12-12

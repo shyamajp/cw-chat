@@ -46,6 +46,8 @@ export const handleKeyDown = (e) => {
     }
   } else {
     if (e.key === STRAIGHT_KEY && !e.repeat) {
+      // disable scrolling down
+      e.preventDefault();
       emitMessage(true);
       startBeep(frequency);
       return;
