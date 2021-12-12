@@ -6,10 +6,12 @@ class RoomPill extends HTMLElement {
     super();
     this.addEventListener("click", this.onClick);
     this.room = "";
+    this.size = "";
   }
 
   connectedCallback() {
     this.room = this.getAttribute("room");
+    this.size = this.getAttribute("size");
 
     this.render();
   }
@@ -25,7 +27,7 @@ class RoomPill extends HTMLElement {
   render() {
     this.innerHTML = `
     <a class="room-pill">
-      <span>${this.room}</span>
+      <span>${this.room} ${this.size}</span>
     </a>
     `;
   }
@@ -51,9 +53,10 @@ class RoomList extends HTMLElement {
       }
       this.id = "room-list";
 
-      rooms.slice(0, 10).forEach((room) => {
+      rooms.slice(0, 10).forEach(({ size, room }) => {
         const roomPillEl = document.createElement("room-pill", { is: RoomPill });
         roomPillEl.setAttribute("room", room);
+        roomPillEl.setAttribute("size", size);
         this.appendChild(roomPillEl);
       });
     });
