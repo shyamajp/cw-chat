@@ -17,11 +17,13 @@ class BeepButton extends HTMLElement {
   }
 
   disconnectedCallback() {
-    this.addEventListener("mousedown", this.onStart);
-    this.addEventListener("mouseup", this.onStop);
+    stopBeep();
 
-    this.addEventListener("touchstart", this.onStart, { passive: true });
-    this.addEventListener("touchend", this.onStop, { passive: true });
+    this.removeEventListener("mousedown", this.onStart);
+    this.removeEventListener("mouseup", this.onStop);
+
+    this.removeEventListener("touchstart", this.onStart, { passive: true });
+    this.removeEventListener("touchend", this.onStop, { passive: true });
   }
 
   onStart() {
