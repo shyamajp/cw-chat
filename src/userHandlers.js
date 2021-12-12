@@ -8,8 +8,8 @@ const addUser = (id, name, room) => {
   if (!name) return { error: "Username is required" };
   if (!room) return { error: "Room is required" };
 
-  if (/^[a-zA-Z]+$/.test(name)) return { error: "Username can only contain alphabets" };
-  if (/^[a-zA-Z]+$/.test(room)) return { error: "Room can only contain alphabets" };
+  if (!/^[a-zA-Z]+$/.test(name)) return { error: "Username can only contain alphabets" };
+  if (!/^[a-zA-Z]+$/.test(room)) return { error: "Room can only contain alphabets" };
 
   if (name.length > 12) return { error: "Name cannot be longer than 12 characters" };
   if (room.length > 18) return { error: "Room cannot be longer than 18 characters" };
