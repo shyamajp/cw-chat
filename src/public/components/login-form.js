@@ -57,7 +57,7 @@ class Login extends HTMLElement {
         <span id="error-message"></span>
       </div>
       <div class="form-item">
-        <button type="submit" id="login-button">login</button>
+        <button type="submit" id="login-button">enter</button>
       </div>
     </form>`;
   }
