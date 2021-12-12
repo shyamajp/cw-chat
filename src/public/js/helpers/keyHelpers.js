@@ -6,9 +6,9 @@ import { emitMessage } from "./socketHelpers.js";
 let i;
 
 /* NOTE: DOT:DASH:PAUSE = 1:3:1 */
-let STRAIGHT_KEY = " ";
-let DOT_KEY = "k";
-let DASH_KEY = "l";
+let STRAIGHT_KEY = "ArrowUp";
+let DOT_KEY = "ArrowLeft";
+let DASH_KEY = "ArrowRight";
 
 function repeat(n) {
   const { frequency, speed } = getUser();

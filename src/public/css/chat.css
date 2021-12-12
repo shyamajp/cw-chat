@@ -49,6 +49,11 @@
   margin-bottom: 4px;
 }
 
+#instructions #key-usages {
+  display: flex;
+  gap: 20px;
+}
+
 /* notification */
 #notification-scroll {
   height: 200px;

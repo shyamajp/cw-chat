@@ -39,15 +39,23 @@
             <hr />
             <div id="instructions">
               <h2>How to use</h2>
-              <ul>
-                <li>Always be kind to others</li>
-                <li>Do not make noise when someone else is speaking</li>
-                <li>Enjoy beeping!</li>
-              </ul>
               <h4>Receiving signal</h4>
               <p>When you are in receive mode, you can hear signals of others in this room but you cannot send any signals. User pill becomes pink in this mode.</p>
               <h4>Sending signal</h4>
               <p>When you are in transmit mode, your sinals will be sent to all users in this room but you cannot receive any signals. User pill becomes red in this mode.</p>
+              <div id="key-usages">
+                <div>
+                  <h5>Straight key</h5>
+                  <key-block key="⬆️" action="beep"></key-block>
+                  <p>You can hold this key for the length of beep.</p>
+                </div>
+                <div>
+                  <h5>Paddle key</h5>
+                  <key-block key="⬅️" action="dot"></key-block>
+                  <key-block key="➡️" action="dash"></key-block>
+                  <p>You can hold this key for continuious dots or dashes.</p>
+                </div>
+              </div>
             </div>
           </div>
           <div class="sub">
@@ -77,5 +85,6 @@
     <script type="module" src="components/notification-list.js"></script>
     <script type="module" src="components/room-list.js"></script>
     <script type="module" src="components/user-list.js"></script>
+    <script type="module" src="components/key-block.js"></script>
   </body>
 </html>
