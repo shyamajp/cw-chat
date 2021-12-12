@@ -106,7 +106,12 @@
   font-size: 40px;
   height: 150px;
   width: 150px;
-  user-select: none;
+}
+
+#beep-button::after {
+  content: "BEEP";
+  display: block;
+  text-align: center;
 }
 
 /* settings */
