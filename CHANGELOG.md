@@ -24,4 +24,5 @@
 - Add CHANGELOG.md
 - Add README.md
 
+[0.0.2]: https://github.com/shyamajp/cw-chat/compare/v0.0.1...v0.0.2
 [0.0.1]: https://github.com/shyamajp/cw-chat/releases/tag/v0.0.1
