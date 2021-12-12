@@ -18,11 +18,6 @@ class UserList extends HTMLElement {
         this.appendChild(userPill);
       });
     });
-    this.render();
-  }
-
-  render() {
-    this.innerHTML = "";
   }
 }
 

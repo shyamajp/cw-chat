@@ -14,44 +14,46 @@
         <h1>CW Chat</h1>
         <login-form></login-form>
         <hr />
-        <p>
-          CW Chat is a real-time chat application in morse code with keyboard. It covers some rig-like features such as transmit / receive mode or channel based communication. Additionally, you can
-          customise the frequency or speed if you opt for paddle key.
-          <br />
-          <b>Happy Beeping!</b>
-          <br />
-          <br />
-          If you have any issues, please reach out to the author via <a href="https://github.com/shyamajp">GitHub</a>.
-        </p>
+        <article>
+          <p>
+            CW Chat is a real-time chat application in morse code with keyboard. It covers some rig-like features such as transmit / receive mode or channel based communication. Additionally, you can
+            customise the frequency or speed if you opt for paddle key.
+            <br />
+            <b>Happy Beeping!</b>
+            <br />
+            <br />
+            If you have any issues, please reach out to the author via <a href="https://github.com/shyamajp">GitHub</a>.
+          </p>
+        </article>
       </div>
       <div class="page" id="chat-page" style="display: none">
         <div class="main">
-          <div id="room-info">
+          <section id="room-info">
             <h1 id="user-room"></h1>
             <user-list></user-list>
-          </div>
-          <div id="chat">
+          </section>
+          <section id="chat">
             <h2>CW Chat</h2>
             <beep-button></beep-button>
             <mode-switch></mode-switch>
-          </div>
+          </section>
           <hr />
-          <div id="instructions">
+          <section id="instructions">
             <h2>How to use</h2>
             <h4>Receiving signal</h4>
             <p>When you are in receive mode, you can hear signals of others in this room but you cannot send any signals. User pill becomes pink in this mode.</p>
             <h4>Sending signal</h4>
             <p>When you are in transmit mode, your sinals will be sent to all users in this room but you cannot receive any signals. User pill becomes red in this mode.</p>
-            <div id="key-usages">
-              <div>
+            <section id="key-usages">
+              <article>
                 <h5>Straight key</h5>
                 <key-block>
                   <span slot="key">⬆️</span>
                   <span slot="action">beep</span>
                 </key-block>
                 <p>You can hold this key for the length of beep.</p>
-              </div>
-              <div>
+              </article>
+              <article>
                 <h5>Paddle key</h5>
                 <key-block>
                   <span slot="key">⬅️</span>
@@ -62,21 +64,21 @@
                   <span slot="action">dash</span>
                 </key-block>
                 <p>You can hold this key for continuious dots or dashes.</p>
-              </div>
-            </div>
-          </div>
+              </article>
+            </section>
+          </section>
         </div>
         <div class="sub">
-          <div id="notifications">
+          <section id="notifications">
             <h2>Notifications</h2>
             <div id="notification-scroll">
               <notification-list></notification-list>
             </div>
-          </div>
-          <div id="settings">
+          </section>
+          <section id="settings">
             <h2>Settings</h2>
             <settings-form></settings-form>
-          </div>
+          </section>
         </div>
       </div>
     </main>
