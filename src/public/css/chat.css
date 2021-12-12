@@ -19,6 +19,11 @@
   width: 30%;
 }
 
+#chat-action {
+  display: flex;
+  justify-content: space-between;
+}
+
 /* room */
 #user-room {
   font-size: 2em;
@@ -112,6 +117,34 @@
   content: "BEEP";
   display: block;
   text-align: center;
+}
+
+/* cheat sheet*/
+#cheat-sheet,
+td {
+  padding-left: 8px;
+  padding-right: 8px;
+  border-collapse: collapse;
+}
+
+tr:nth-child(odd) {
+  background-color: var(--text-light);
+}
+
+#cheat-sheet .alphebet {
+  font-weight: 800;
+  color: var(--text-error);
+}
+
+#cheat-sheet .code {
+  font-weight: 800;
+  color: var(--text-dark);
+}
+
+@media only screen and (max-width: 600px) {
+  #cheat-sheet {
+    display: none;
+  }
 }
 
 /* settings */
