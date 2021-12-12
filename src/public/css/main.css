@@ -50,9 +50,6 @@ header #user-count {
 /* main */
 main {
   flex-grow: 1;
-}
-
-#container {
   min-height: 100%;
   max-width: 90%;
   margin: 0 auto;
