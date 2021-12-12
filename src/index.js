@@ -84,9 +84,6 @@ io.on("connection", (socket) => {
     // Broadcast: Number of all connected clients
     io.emit(EventName.UserCount, io.engine.clientsCount);
     if (!user) {
-      logger.error(`[${socket.id}] Could not find a user`);
-      // Current user: Error
-      io.to(socket.id).emit(EventName.Error, "Could not find a user");
       return;
     }
     logger.info(`[${socket.id}] Left room "${user.room}"`);
