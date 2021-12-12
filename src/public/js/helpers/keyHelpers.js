@@ -6,7 +6,7 @@ import { emitMessage } from "./socketHelpers.js";
 let i;
 
 /* NOTE: DOT:DASH:PAUSE = 1:3:1 */
-let STRAIGHT_KEY = "ArrowUp";
+let STRAIGHT_KEY = " ";
 let DOT_KEY = "ArrowLeft";
 let DASH_KEY = "ArrowRight";
 
