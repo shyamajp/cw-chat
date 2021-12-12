@@ -1,21 +1,23 @@
+const template = document.createElement("template");
+template.innerHTML = `
+  <span>
+    <slot name="key"></slot>
+    <slot name="action"></slot>
+  </span>
+`;
+
 class KeyBlock extends HTMLElement {
   constructor() {
     super();
-    this.key = "";
-    this.action = "";
+    this.attachShadow({ mode: "open" });
   }
 
   connectedCallback() {
-    this.key = this.getAttribute("key");
-    this.action = this.getAttribute("action");
-
     this.render();
   }
 
   render() {
-    this.innerHTML = `
-    <span class="key-block">${this.key} ${this.action}</span>
-    `;
+    this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 }
 

@@ -45,13 +45,22 @@
             <div id="key-usages">
               <div>
                 <h5>Straight key</h5>
-                <key-block key="⬆️" action="beep"></key-block>
+                <key-block>
+                  <span slot="key">⬆️</span>
+                  <span slot="action">beep</span>
+                </key-block>
                 <p>You can hold this key for the length of beep.</p>
               </div>
               <div>
                 <h5>Paddle key</h5>
-                <key-block key="⬅️" action="dot"></key-block>
-                <key-block key="➡️" action="dash"></key-block>
+                <key-block>
+                  <span slot="key">⬅️</span>
+                  <span slot="action">dot</span>
+                </key-block>
+                <key-block>
+                  <span slot="key">➡️</span>
+                  <span slot="action">dash</span>
+                </key-block>
                 <p>You can hold this key for continuious dots or dashes.</p>
               </div>
             </div>
