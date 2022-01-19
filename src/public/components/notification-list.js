@@ -9,7 +9,7 @@ class NotificationList extends HTMLElement {
   connectedCallback() {
     socket.on(EventName.Notification, (notification) => {
       const notificationMessageEl = document.createElement("li");
-      notificationMessageEl.innerHTML = notification;
+      notificationMessageEl.textContent = notification;
       this.appendChild(notificationMessageEl);
 
       const notificationScrollEl = document.getElementById("notification-scroll");

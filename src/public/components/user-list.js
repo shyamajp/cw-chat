@@ -14,7 +14,7 @@ class UserList extends HTMLElement {
       users.forEach(({ name, mode }) => {
         const userPill = document.createElement("span");
         userPill.className = `user-pill ${mode || DEFAULT_MODE}`;
-        userPill.innerHTML = name;
+        userPill.textContent = `${name}`;
         this.appendChild(userPill);
       });
     });

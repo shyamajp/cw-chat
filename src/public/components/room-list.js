@@ -13,7 +13,10 @@ class RoomPill extends HTMLElement {
     this.room = this.getAttribute("room");
     this.size = this.getAttribute("size");
 
-    this.render();
+    const roomPill = document.createElement("a");
+    roomPill.className = "room-pill";
+    roomPill.textContent = `${this.room} ${this.size}`;
+    this.appendChild(roomPill);
   }
 
   disconnectedCallback() {
@@ -22,14 +25,6 @@ class RoomPill extends HTMLElement {
 
   onClick() {
     document.getElementById("room").value = this.room;
-  }
-
-  render() {
-    this.innerHTML = `
-    <a class="room-pill">
-      <span>${this.room} ${this.size}</span>
-    </a>
-    `;
   }
 }
 

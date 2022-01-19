@@ -22,7 +22,7 @@ class Login extends HTMLElement {
     emitLogin(room, name);
     receiveError().then((errorMessage) => {
       const errorMessageEl = document.getElementById("error-message");
-      errorMessageEl.innerHTML = errorMessage;
+      errorMessageEl.textContent = errorMessage;
       if (!errorMessage) {
         const user = createUser(name, room);
         document.getElementById("user-room").textContent = room;
