@@ -25,7 +25,9 @@ _TBA_
 
 ### Make a PR
 
-_TBA_
+- Make a pull request at [Pull requests](https://github.com/shyamajp/gatsby-theme-paste/pulls)
+
+> Please follow our PR template!
 
 ### Report bugs
 
