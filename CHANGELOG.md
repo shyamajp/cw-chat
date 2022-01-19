@@ -1,5 +1,19 @@
 # Change Log
 
+## [0.0.4] - 2022-01-19
+
+### Added
+
+- Add PR template
+- Add jest test
+
+### Fixed
+
+- Update validation to use special characters
+- Use `textContent` for escaping
+- Update right command
+- Fix B in cheetsheet
+
 ## [0.0.3] - 2021-12-12
 
 ### Fixed

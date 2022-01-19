@@ -19,7 +19,8 @@ CW Chat is an online chat application at [cw-chat.com](https://cw-chat.com).
 
 ## For Testing
 
-_TBA_
+- Run all tests: `npm run test`
+- Run all tests and collect coverage: `npm run testCoverage`
 
 ## Contributing
 

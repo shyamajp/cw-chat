@@ -11,7 +11,8 @@
     "restart": "pm2 reload ecosystem.json",
     "dev": "nodemon",
     "stage": "node src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "testCoverage": "jest --collectCoverage"
   },
   "keywords": [],
   "author": "shyamajp",
@@ -23,6 +24,7 @@
     "socket.io": "^4.4.0"
   },
   "devDependencies": {
+    "jest": "^27.4.7",
     "nodemon": "^2.0.15"
   },
   "repository": {

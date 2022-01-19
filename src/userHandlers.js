@@ -1,4 +1,4 @@
-const users = [];
+users = [];
 
 const addUser = (id, name, room) => {
   const existingUser = users.find((user) => user.name.trim().toLowerCase() === name.trim().toLowerCase());
@@ -11,7 +11,7 @@ const addUser = (id, name, room) => {
   if (!/^[a-z0-9_-]+$/i.test(name)) return { error: "Username can only contain alphanumeric characters or a few special characters(_ and -)" };
   if (!/^[a-z0-9_-]+$/i.test(room)) return { error: "Room can only contain alphanumeric characters or a few special characters(_ and -)" };
 
-  if (name.length > 12) return { error: "Name cannot be longer than 12 characters" };
+  if (name.length > 12) return { error: "Username cannot be longer than 12 characters" };
   if (room.length > 18) return { error: "Room cannot be longer than 18 characters" };
 
   const user = { id, name, room };
@@ -28,6 +28,7 @@ const updateUser = (id, obj) => {
   const index = users.findIndex((user) => user.id === id);
   if (index !== -1) {
     users[index] = { ...users[index], ...obj };
+    return users[index];
   }
 };
 
