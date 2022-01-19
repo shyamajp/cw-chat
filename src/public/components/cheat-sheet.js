@@ -22,7 +22,7 @@ class CheatSheet extends HTMLElement {
       </tr>
       <tr>
         <td class="alphebet">B</td>
-        <td class="code">ー・・・・</td>
+        <td class="code">ー・・・</td>
         <td class="alphebet">O</td>
         <td class="code">ーーー</td>
         <td class="alphebet">2</td>
