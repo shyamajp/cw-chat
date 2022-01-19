@@ -7,7 +7,7 @@ CW Chat is an online chat application at [cw-chat.com](https://cw-chat.com).
 ### Local
 
 1. Install packages: `npm install`
-2. Start app in development mode: `npm start`
+2. Start app in development mode: `npm run dev`
 
 ### Production
 
