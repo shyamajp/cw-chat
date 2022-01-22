@@ -4,12 +4,13 @@
   "description": "An online chat application in morse code",
   "main": "src/index.js",
   "scripts": {
-    "start": "pm2-runtime start ecosystem.json",
+    "preinstall": "npm install pm2 -g",
+    "prod": "pm2-runtime start ecosystem.json",
     "stop": "pm2 stop ecosystem.json",
     "delete": "pm2 delete ecosystem.json",
     "restart": "pm2 reload ecosystem.json",
     "dev": "nodemon",
-    "stage": "node src/index.js",
+    "start": "node src/index.js",
     "test": "jest",
     "testCoverage": "jest --collectCoverage"
   },
