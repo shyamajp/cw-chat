@@ -4,7 +4,7 @@ beforeEach(() => {
   window.users = [{ id: "user-id", name: "user-name", room: "user-room" }];
 });
 
-afterAll(() => {
+afterEach(() => {
   delete window.users;
 });
 
