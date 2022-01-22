@@ -6,6 +6,7 @@
 
 - Add PR template
 - Add jest test
+- Add GitHub Actions
 
 ### Fixed
 
