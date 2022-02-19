@@ -1,6 +1,6 @@
 {
   "name": "cw-chat",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "An online chat application in morse code",
   "main": "src/index.js",
   "scripts": {
