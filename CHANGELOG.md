@@ -2,6 +2,12 @@
 
 ## [unreleased]
 
+## [0.0.6] - 2022-10-01
+
+### Changed
+
+- Update packages
+
 ## [0.0.5] - 2022-02-19
 
 ### Changed
