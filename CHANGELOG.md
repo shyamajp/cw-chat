@@ -2,6 +2,10 @@
 
 ## [unreleased]
 
+### Added
+
+- Add a health check endpoint at `/health`
+
 ## [0.0.6] - 2022-10-01
 
 ### Changed
