@@ -96,7 +96,7 @@ io.on("connection", (socket) => {
 
 /* ROUTES */
 app.get("/health", (req, res, next) => {
-  res.send(200);
+  res.sendStatus(200);
 });
 
 app.use(express.static(__dirname + "/public"));
