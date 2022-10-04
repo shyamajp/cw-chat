@@ -94,9 +94,13 @@ io.on("connection", (socket) => {
   });
 });
 
+/* ROUTES */
+app.get("/health", (req, res, next) => {
+  res.send(200);
+});
+
 app.use(express.static(__dirname + "/public"));
 
-/* ROUTES */
 app.get("/", (req, res, next) => {
   try {
     res.sendFile(path.join(__dirname + "/public/index.html"));
